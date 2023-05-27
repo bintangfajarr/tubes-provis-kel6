@@ -1,157 +1,39 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:tubes/pages/kebijakanreg.dart';
-import 'package:tubes/pages/login.dart';
-import 'package:tubes/pages/register.dart';
-import 'package:tubes/pages/syaratketentuan.dart';
 
-class LandingPage extends StatefulWidget {
-  const LandingPage({super.key});
+class MarketPlacePage extends StatelessWidget {
+  const MarketPlacePage({
+    super.key,
+  });
 
-  @override
-  State<LandingPage> createState() => _LandingPageState();
-}
-
-class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color.fromARGB(250, 250, 250, 250),
-      body: ListView(
-        padding: EdgeInsets.fromLTRB(16, 30, 16, 10),
+    return SafeArea(
+      child: ListView(
+        padding: const EdgeInsets.all(10),
         children: [
-          const SizedBox(
-            height: 60,
-            //child: Container(color: Colors.amber),
-          ),
-          Column(
-            children: [
-              Image.asset(
-                "assets/images/LogoPromvis1.png",
-                alignment: Alignment.topCenter,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                "Fundalize",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                  fontFamily: 'Poppins',
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 200,
-          ),
           Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ElevatedButton(
+            // Add padding around the search bar
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            // Use a Material design search bar
+            child: TextField(
+              // controller: _searchController,
+              decoration: InputDecoration(
+                hintText: 'Quick Search',
+                // Add a clear button to the search bar
+                suffixIcon: IconButton(
+                  icon: Icon(Icons.clear),
+                  onPressed: () {},
+                ),
+                // Add a search icon or button to the search bar
+                prefixIcon: IconButton(
+                  icon: Icon(Icons.search),
                   onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return LoginPage();
-                        },
-                      ),
-                    );
+                    // Perform the search here
                   },
-                  child: Text("Login"),
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                      Color.fromARGB(255, 0, 97, 175),
-                    ),
-                    fixedSize: MaterialStateProperty.all(
-                      Size(256.0, 32.0),
-                    ),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  ),
                 ),
-                SizedBox(
-                  height: 8,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20.0),
                 ),
-                OutlinedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return RegisterPage();
-                        },
-                      ),
-                    );
-                  },
-                  child: Text(
-                    "Register",
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 0, 97, 175),
-                    ),
-                  ),
-                  style: ButtonStyle(
-                    fixedSize: MaterialStateProperty.all(
-                      Size(256.0, 32.0),
-                    ),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    side: MaterialStateProperty.all(
-                      BorderSide(
-                        color: Color.fromARGB(255, 0, 97, 175),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Text(
-            "Dengan mendaftar anda menyetujui",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontFamily: "Poppins"),
-          ),
-          RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return SyaratKetentuanPage();
-                      },
-                    ),
-                  );
-                },
-              text: "Syarat & Ketentuan",
-              style: TextStyle(
-                color: Color.fromARGB(255, 0, 97, 175),
-                decoration: TextDecoration.underline,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 60,
-          ),
-          Center(
-            child: Text(
-              "Daftar UMKM",
-              style: TextStyle(
-                fontFamily: "Poppins",
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
               ),
             ),
           ),
@@ -159,15 +41,15 @@ class _LandingPageState extends State<LandingPage> {
             height: 20,
           ),
           Container(
-            height: 220,
+            height: 600,
             child: ListView.builder(
-              scrollDirection: Axis.horizontal,
+              scrollDirection: Axis.vertical,
               itemCount: 10,
               itemBuilder: (context, index) => Column(
                 children: [
                   Container(
-                    padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
-                    margin: EdgeInsets.only(right: 10),
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    margin: EdgeInsets.only(bottom: 10),
                     width: 335,
                     height: 200,
                     decoration: BoxDecoration(
@@ -214,10 +96,9 @@ class _LandingPageState extends State<LandingPage> {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(50),
                                     image: DecorationImage(
-                                      image: AssetImage(
-                                        'assets/images/dagang.jpg',
-                                      ),
                                       fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                          "https://picsum.photos/200/300"),
                                     ),
                                     border: Border.all(
                                       color: Colors.white,
@@ -276,12 +157,14 @@ class _LandingPageState extends State<LandingPage> {
                                 ],
                               ),
                             ),
-                            IconButton(
-                              padding: EdgeInsets.only(bottom: 20.0, left: 30),
-                              iconSize: 30,
-                              onPressed: () {},
-                              icon: Icon(Icons.add_circle_outline_rounded),
-                              color: Color.fromARGB(255, 0, 97, 175),
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.topRight,
+                                child: Icon(
+                                  Icons.add_circle_outline_rounded,
+                                  color: Color.fromARGB(255, 0, 97, 175),
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -365,18 +248,22 @@ class _LandingPageState extends State<LandingPage> {
                                 Stack(
                                   children: [
                                     Container(
+                                      height: 12,
                                       width: 230,
-                                      height: 16,
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: LinearProgressIndicator(
-                                          backgroundColor: Colors.grey[300],
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                            Color.fromARGB(255, 0, 97, 175),
-                                          ),
-                                          value: 0.8,
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey[300],
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(10),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 12,
+                                      width: 200,
+                                      decoration: BoxDecoration(
+                                        color: Color.fromARGB(255, 0, 97, 175),
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(10),
                                         ),
                                       ),
                                     ),
@@ -388,7 +275,7 @@ class _LandingPageState extends State<LandingPage> {
                                         "Rp. 4.000.000",
                                         style: TextStyle(
                                             fontFamily: "Poppins",
-                                            fontSize: 10,
+                                            fontSize: 8,
                                             color: Colors.white),
                                       ),
                                     )
@@ -410,51 +297,6 @@ class _LandingPageState extends State<LandingPage> {
                   ),
                 ],
               ),
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
-            decoration: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  color: Colors.black,
-                  width: 1.0,
-                ),
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "Kebijakan Regulasi",
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 18,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return KebijakanRegulasiPage();
-                            },
-                          ),
-                        );
-                      },
-                      icon: const Icon(Icons.arrow_forward_ios),
-                    ),
-                  ],
-                ),
-              ],
             ),
           ),
         ],

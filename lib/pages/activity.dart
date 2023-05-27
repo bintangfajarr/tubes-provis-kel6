@@ -239,27 +239,28 @@ class _ActivityPageState extends State<ActivityPage> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: index,
-        selectedItemColor: const Color.fromARGB(255, 0, 97, 175),
-        unselectedItemColor: Colors.grey[300],
-        onTap: (value) {
-          setState(() {
-            index = value;
-          });
-        },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: "Home"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.pie_chart_rounded), label: "Portofolio"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart), label: "Marketplace"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.dashboard_rounded), label: "Activity"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle_rounded), label: "Account"),
-        ],
-      ),
+
+      // bottomNavigationBar: BottomNavigationBar(
+      //   currentIndex: index,
+      //   selectedItemColor: const Color.fromARGB(255, 0, 97, 175),
+      //   unselectedItemColor: Colors.grey[300],
+      //   onTap: (value) {
+      //     setState(() {
+      //       index = value;
+      //     });
+      //   },
+      //   items: const [
+      //     BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: "Home"),
+      //     BottomNavigationBarItem(
+      //         icon: Icon(Icons.pie_chart_rounded), label: "Portofolio"),
+      //     BottomNavigationBarItem(
+      //         icon: Icon(Icons.shopping_cart), label: "Marketplace"),
+      //     BottomNavigationBarItem(
+      //         icon: Icon(Icons.dashboard_rounded), label: "Activity"),
+      //     BottomNavigationBarItem(
+      //         icon: Icon(Icons.account_circle_rounded), label: "Account"),
+      //   ],
+      // ),
     );
   }
 }

@@ -12,6 +12,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   bool isHidden = true;
   bool isHiddenn = true;
+  late String selectedValue;
 
   @override
   Widget build(BuildContext context) {
@@ -119,40 +120,76 @@ class _RegisterPageState extends State<RegisterPage> {
                   OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
             ),
           ),
+          SizedBox(height: 20),
+          DropdownButton(
+            value: selectedValue,
+            items: <String>['pagi', 'siang', 'sore']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: (value) {
+              setState(() {
+                selectedValue = value!;
+              });
+            },
+          ),
           SizedBox(height: 100),
-          ElevatedButton(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
+          Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                          ),
+                        ),
+                        backgroundColor: Color.fromARGB(255, 0, 97, 175),
+                        content: Text(
+                          "Berhasil Membuat Akun",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                          ),
+                        ),
+                      ),
+                    );
+                    Navigator.of(context).pop(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return LoginPage();
+                        },
+                      ),
+                    );
+                  },
+                  child: Text(
+                    "Register",
+                    style: TextStyle(
+                      fontFamily: "Poppins",
                     ),
                   ),
-                  backgroundColor: Color.fromARGB(255, 0, 97, 175),
-                  content: Text(
-                    "Berhasil Membuat Akun",
-                    style: TextStyle(fontFamily: "Poppins"),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                      Color.fromARGB(255, 0, 97, 175),
+                    ),
+                    fixedSize: MaterialStateProperty.all(
+                      Size(256.0, 32.0),
+                    ),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
                   ),
                 ),
-              );
-              Navigator.of(context).pop(
-                MaterialPageRoute(
-                  builder: (context) {
-                    return LoginPage();
-                  },
-                ),
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Color.fromARGB(255, 0, 97, 175),
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
+              ],
             ),
-            child: Text("Register"),
           ),
           SizedBox(
             height: 20,

@@ -1,7 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:tubes/pages/account.dart';
 import 'package:tubes/pages/register.dart';
+
+import 'app.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -83,26 +84,35 @@ class _LoginPageState extends State<LoginPage> {
           ),
           const SizedBox(height: 100),
           Container(
-            width: 200,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return AccountPage();
-                    },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return MyAppPage();
+                        },
+                      ),
+                    );
+                  },
+                  child: Text("Login"),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                      Color.fromARGB(255, 0, 97, 175),
+                    ),
+                    fixedSize: MaterialStateProperty.all(
+                      Size(256.0, 32.0),
+                    ),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
                   ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromARGB(255, 0, 97, 175),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
                 ),
-              ),
-              child: const Text("Login"),
+              ],
             ),
           ),
           const SizedBox(

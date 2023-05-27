@@ -1,6 +1,6 @@
 {
-    "name": "testubes",
-    "short_name": "testubes",
+    "name": "tubes",
+    "short_name": "tubes",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
