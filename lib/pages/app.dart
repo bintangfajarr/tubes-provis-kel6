@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tubes/pages/account.dart';
+import 'package:tubes/pages/investor/account.dart';
 import 'package:tubes/pages/investor/home.dart';
 import 'package:tubes/pages/investor/market.dart';
 
-import 'activity.dart';
+import 'investor/activity.dart';
 
 class MyAppPage extends StatefulWidget {
   const MyAppPage({super.key});

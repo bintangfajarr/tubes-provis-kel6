@@ -1,3 +1,4 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:tubes/pages/login.dart';
@@ -9,42 +10,50 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
+enum roleType { investor, borrower }
+
 class _RegisterPageState extends State<RegisterPage> {
   bool isHidden = true;
   bool isHiddenn = true;
-  late String selectedValue;
+
+  roleType? jenisRole;
+
+  List<String> bank = [
+    "Bank Central Asia",
+    "Bank Mandiri",
+    "Bank Jago",
+    "United Overseas Bank",
+    "BCA Syariah",
+    "Bank Negara Indonesia",
+    "Bank Permata",
+    "Bank Syariah Indonesia",
+    "Bank Rakyat Indonesia",
+    "Bank BJB",
+    "Bank Maybank",
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+        elevation: 0,
+        title: Text(
+          "Register",
+          style: TextStyle(
+            fontFamily: "Poppins",
+            fontWeight: FontWeight.bold,
+            color: Color.fromARGB(255, 0, 97, 175),
+            fontSize: 25,
+          ),
+        ),
+      ),
       body: ListView(
-        padding: EdgeInsets.all(40),
+        padding: EdgeInsets.all(30),
         children: [
-          SizedBox(
-            height: 60,
-            //child: Container(color: Colors.amber),
-          ),
-          Column(
-            children: [
-              Image.asset(
-                "assets/images/LogoPromvis1.png",
-                alignment: Alignment.topCenter,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                "Register",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                  fontFamily: 'Poppins',
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 80),
+          //email
           TextField(
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
@@ -58,7 +67,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
             ),
           ),
-          SizedBox(height: 20),
+
+          SizedBox(
+            height: 20,
+          ),
+
+          //password
           TextField(
             obscureText: isHidden,
             textInputAction: TextInputAction.next,
@@ -81,7 +95,12 @@ class _RegisterPageState extends State<RegisterPage> {
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(5))),
           ),
-          SizedBox(height: 20),
+
+          SizedBox(
+            height: 20,
+          ),
+
+          //retype password
           TextField(
             obscureText: isHiddenn,
             textInputAction: TextInputAction.next,
@@ -90,15 +109,16 @@ class _RegisterPageState extends State<RegisterPage> {
                   EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               prefixIcon: Icon(Icons.lock),
               suffixIcon: IconButton(
-                  onPressed: () {
-                    if (isHiddenn == true) {
-                      isHiddenn = false;
-                    } else {
-                      isHiddenn = true;
-                    }
-                    setState(() {});
-                  },
-                  icon: Icon(Icons.remove_red_eye)),
+                onPressed: () {
+                  if (isHiddenn == true) {
+                    isHiddenn = false;
+                  } else {
+                    isHiddenn = true;
+                  }
+                  setState(() {});
+                },
+                icon: Icon(Icons.remove_red_eye),
+              ),
               hintText: "Ulangi Password",
               labelText: "Retype Password",
               border: OutlineInputBorder(
@@ -106,10 +126,15 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             ),
           ),
-          SizedBox(height: 20),
+
+          SizedBox(
+            height: 20,
+          ),
+
+          //telephone
           TextField(
             keyboardType: TextInputType.phone,
-            textInputAction: TextInputAction.done,
+            textInputAction: TextInputAction.next,
             decoration: InputDecoration(
               contentPadding:
                   EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -120,23 +145,151 @@ class _RegisterPageState extends State<RegisterPage> {
                   OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
             ),
           ),
-          SizedBox(height: 20),
-          DropdownButton(
-            value: selectedValue,
-            items: <String>['pagi', 'siang', 'sore']
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-            onChanged: (value) {
-              setState(() {
-                selectedValue = value!;
-              });
-            },
+
+          SizedBox(
+            height: 20,
           ),
-          SizedBox(height: 100),
+
+          //bank
+          Container(
+            height: 47.0,
+            child: DropdownSearch<String>(
+              mode: Mode.DIALOG,
+              showSelectedItem: true,
+              items: bank,
+              label: "Pilih Bank",
+              hint: "Pilih Bank",
+              showSearchBox: true,
+              showClearButton: true,
+              popupTitle: Container(
+                padding: EdgeInsets.all(14.0),
+                child: Text(
+                  "Pilihan Bank",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Poppins",
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                ),
+              ),
+              popupShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              popupItemBuilder: (context, item, isSelected) {
+                return Container(
+                  height: 40,
+                  alignment: Alignment.centerLeft,
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        color: Color.fromARGB(255, 230, 230, 230),
+                        width: 1.0,
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    item,
+                    textAlign: TextAlign.left,
+                  ),
+                );
+              },
+            ),
+          ),
+
+          SizedBox(
+            height: 20,
+          ),
+
+          //rekening
+          TextField(
+            keyboardType: TextInputType.number,
+            textInputAction: TextInputAction.done,
+            decoration: InputDecoration(
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              prefixIcon: Icon(Icons.wallet),
+              hintText: "Masukkan No. Rekening",
+              labelText: "Rekening",
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+
+          //role
+          Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 0.5),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Row(
+                        children: [
+                          Radio(
+                            value: roleType.investor,
+                            groupValue: jenisRole,
+                            onChanged: (roleType? value) {
+                              setState(() {
+                                jenisRole = value;
+                              });
+                            },
+                          ),
+                          Expanded(
+                            child: Text('Investor'),
+                          )
+                        ],
+                      ),
+                    ),
+                    flex: 1,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 0.5),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Row(
+                        children: [
+                          Radio(
+                            value: roleType.borrower,
+                            groupValue: jenisRole,
+                            onChanged: (roleType? value) {
+                              setState(() {
+                                jenisRole = value;
+                              });
+                            },
+                          ),
+                          Expanded(
+                            child: Text('Borrower'),
+                          )
+                        ],
+                      ),
+                    ),
+                    flex: 1,
+                  ),
+                ],
+              ),
+            ],
+          ),
+
+          SizedBox(
+            height: 70,
+          ),
+
+          //button
           Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,

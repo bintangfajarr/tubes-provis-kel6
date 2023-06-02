@@ -17,12 +17,13 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        padding: EdgeInsets.all(40),
+        padding: EdgeInsets.all(30),
         children: [
           const SizedBox(
             height: 60,
-            //child: Container(color: Colors.amber),
           ),
+
+          //foto
           Column(
             children: [
               Image.asset(
@@ -43,7 +44,12 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ],
           ),
-          const SizedBox(height: 180),
+
+          const SizedBox(
+            height: 140,
+          ),
+
+          //email
           TextField(
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
@@ -57,7 +63,12 @@ class _LoginPageState extends State<LoginPage> {
                   OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
             ),
           ),
-          const SizedBox(height: 20),
+
+          const SizedBox(
+            height: 20,
+          ),
+
+          //password
           TextField(
             obscureText: isHidden,
             textInputAction: TextInputAction.done,
@@ -82,7 +93,12 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          const SizedBox(height: 100),
+
+          const SizedBox(
+            height: 100,
+          ),
+
+          //button
           Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -128,21 +144,22 @@ class _LoginPageState extends State<LoginPage> {
           RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return RegisterPage();
-                        },
-                      ),
-                    );
-                  },
-                text: "Register disini",
-                style: const TextStyle(
-                  color: Color.fromARGB(255, 0, 97, 175),
-                  decoration: TextDecoration.underline,
-                )),
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return RegisterPage();
+                      },
+                    ),
+                  );
+                },
+              text: "Register disini",
+              style: const TextStyle(
+                color: Color.fromARGB(255, 0, 97, 175),
+                decoration: TextDecoration.underline,
+              ),
+            ),
           ),
         ],
       ),
