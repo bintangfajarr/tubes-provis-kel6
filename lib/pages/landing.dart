@@ -118,7 +118,7 @@ class _LandingPageState extends State<LandingPage> {
             height: 16,
           ),
           Text(
-            "Dengan mendaftar anda menyetujui",
+            "Dengan mendaftar anda mengakui bahwa",
             textAlign: TextAlign.center,
             style: TextStyle(fontFamily: "Poppins"),
           ),
@@ -135,7 +135,7 @@ class _LandingPageState extends State<LandingPage> {
                     ),
                   );
                 },
-              text: "Syarat & Ketentuan",
+              text: "Ojan ganteng",
               style: TextStyle(
                 color: Color.fromARGB(255, 0, 97, 175),
                 decoration: TextDecoration.underline,
