@@ -2,6 +2,8 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:tubes/pages/login.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class RegisterPage extends StatefulWidget {
   RegisterPage({super.key});
@@ -13,6 +15,53 @@ class RegisterPage extends StatefulWidget {
 enum roleType { investor, borrower }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final namaEditController = TextEditingController();
+  final emailEditController = TextEditingController();
+  final telpEditController = TextEditingController();
+  final passwordEditController = TextEditingController();
+  String _nama = "";
+  String _email = "";
+  String _telp = "";
+  String _password = "";
+
+  @override
+  void dispose() {
+    // controller dibersihkan saat widget dibuang
+    namaEditController.dispose();
+    emailEditController.dispose();
+    telpEditController.dispose();
+    passwordEditController.dispose();
+    super.dispose();
+  }
+
+  Future<void> postDataToAPI() async {
+    final url = Uri.parse('http://localhost:8000/insert_user/');
+    final headers = {'content-type': 'application/json', 'server': 'uvicorn'};
+    final body = jsonEncode({
+      'user_nama': _nama,
+      'user_email': _email,
+      'user_no_telp': _telp,
+      'user_password': _password,
+      'user_role': 'admin',
+      'user_saldo': 0
+    });
+
+    try {
+      final response = await http.post(url, headers: headers, body: body);
+
+      if (response.statusCode == 200) {
+        // Request successful
+        print('API request successful');
+      } else {
+        // Error occurred
+        print('API request failed with status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Exception occurred
+      print('An error occurred: $e');
+    }
+  }
+
   bool isHidden = true;
   bool isHiddenn = true;
 
@@ -53,8 +102,28 @@ class _RegisterPageState extends State<RegisterPage> {
       body: ListView(
         padding: EdgeInsets.all(30),
         children: [
-          //email
+          //nama
           TextField(
+            controller: namaEditController,
+            keyboardType: TextInputType.text,
+            textInputAction: TextInputAction.next,
+            decoration: InputDecoration(
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              prefixIcon: Icon(Icons.person),
+              hintText: "Masukkan Nama",
+              labelText: "Nama",
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
+            ),
+          ),
+
+          SizedBox(
+            height: 20,
+          ),
+
+          TextField(
+            controller: emailEditController,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
@@ -74,6 +143,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
           //password
           TextField(
+            controller: passwordEditController,
             obscureText: isHidden,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
@@ -133,6 +203,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
           //telephone
           TextField(
+            controller: telpEditController,
             keyboardType: TextInputType.phone,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
@@ -295,7 +366,14 @@ class _RegisterPageState extends State<RegisterPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    _nama = namaEditController.text;
+                    _email = emailEditController.text;
+                    _telp = telpEditController.text;
+                    _password = passwordEditController.text;
+
+                    await postDataToAPI();
+
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         shape: RoundedRectangleBorder(
