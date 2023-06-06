@@ -2,8 +2,68 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:tubes/pages/register.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:developer' as developer;
 
 import 'app.dart';
+
+class UserModel {
+  int user_id;
+  String user_nama;
+  String user_no_telp;
+  String user_password;
+  String user_role;
+  int user_saldo;
+
+  UserModel(
+      {required this.user_id,
+      required this.user_nama,
+      required this.user_no_telp,
+      required this.user_password,
+      required this.user_role,
+      required this.user_saldo});
+}
+
+class UserCubit extends Cubit<UserModel> {
+  String url = "http://localhost:8000/select_user/";
+
+  UserCubit()
+      : super(UserModel(
+            user_id: 0,
+            user_nama: "",
+            user_no_telp: "",
+            user_password: "",
+            user_role: "",
+            user_saldo: 0));
+
+  void setFromJson(Map<String, dynamic> json) {
+    int user_id = json['user_id'];
+    String user_nama = json['user_nama'];
+    String user_no_telp = json['user_no_telp'];
+    String user_password = json['user_password'];
+    String user_role = json['user_role'];
+    int user_saldo = json['user_saldo'];
+
+    emit(UserModel(
+        user_id: user_id,
+        user_nama: user_nama,
+        user_no_telp: user_no_telp,
+        user_password: user_password,
+        user_role: user_role,
+        user_saldo: user_saldo));
+  }
+
+  void fetchData() async {
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      setFromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Gagal mengambil data user');
+    }
+  }
+}
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

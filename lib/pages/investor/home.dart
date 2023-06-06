@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tubes/pages/investor/topup.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tubes/pages/login.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:developer' as developer;
 
 class HomePage extends StatefulWidget {
   @override
@@ -25,162 +30,162 @@ class _HomePageState extends State<HomePage> {
               Container(
                 width: 412,
                 height: 186,
-                child: Stack(
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Container(
-                        height: 138,
-                        decoration: BoxDecoration(
-                          color: Color(0xffbcd9f1),
-                          borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(10),
-                            bottomLeft: Radius.circular(10),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 15, top: 19),
-                        child: Text(
-                          'Hi, Bintang Fajar',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            height: 1.5,
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 15, top: 14),
-                        child: Icon(
-                          Icons.notifications_none_rounded,
-                          size: 25,
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 15, top: 55),
-                        child: Text(
-                          'Total asetmu',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 10,
-                            fontWeight: FontWeight.w400,
-                            height: 1.5,
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 15, top: 90),
-                        child: RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 8,
-                              fontWeight: FontWeight.w400,
-                              height: 1.5,
-                              color: Color(0xff000000),
-                            ),
-                            children: [
-                              TextSpan(
-                                text: 'Total profit ',
+                child: BlocBuilder<UserCubit, UserModel>(
+                  buildWhen: (previousState, state) {
+                    developer.log(
+                        "${previousState.user_id} -> ${state.user_id}",
+                        name: 'reloadlog');
+                    return true;
+                  },
+                  builder: (context, user) {
+                    context.read<UserCubit>().fetchData();
+                    return Stack(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Container(
+                            height: 138,
+                            decoration: BoxDecoration(
+                              color: Color(0xffbcd9f1),
+                              borderRadius: BorderRadius.only(
+                                bottomRight: Radius.circular(10),
+                                bottomLeft: Radius.circular(10),
                               ),
-                              TextSpan(
-                                text: 'Rp 0',
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 15, top: 19),
+                            child: Text(
+                              'Hi, ' + user.user_nama + '!',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'Poppins',
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                height: 1.5,
+                                color: Color(0xff000000),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 15, top: 14),
+                            child: Icon(
+                              Icons.notifications_none_rounded,
+                              size: 25,
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 15, top: 55),
+                            child: Text(
+                              'Total asetmu',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'Poppins',
+                                fontSize: 10,
+                                fontWeight: FontWeight.w400,
+                                height: 1.5,
+                                color: Color(0xff000000),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 15, top: 90),
+                            child: RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
                                   fontSize: 8,
                                   fontWeight: FontWeight.w400,
                                   height: 1.5,
-                                  color: Color(0xff05ff00),
+                                  color: Color(0xff000000),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 15, top: 70),
-                        child: Text(
-                          'Rp 0',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                            height: 1.5,
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 84, top: 57),
-                        child: Icon(
-                          Icons.error_outline_rounded,
-                          size: 12.52,
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.only(left: 7, top: 107, right: 7),
-                        child: Container(
-                          padding: EdgeInsets.fromLTRB(20, 13, 20, 0),
-                          width: 399,
-                          height: 77,
-                          decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 255, 252, 252),
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color(0x3f000000),
-                                offset: Offset(0, 4),
-                                blurRadius: 2,
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                padding: EdgeInsets.only(bottom: 7),
-                                child: RichText(
-                                  text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: 'Total profit ',
+                                  ),
+                                  TextSpan(
+                                    text: 'Rp ' + user.user_saldo.toString(),
                                     style: TextStyle(
                                       fontFamily: 'Poppins',
-                                      fontSize: 14,
+                                      fontSize: 8,
                                       fontWeight: FontWeight.w400,
                                       height: 1.5,
-                                      color: Color(0xff000000),
+                                      color: Color(0xff05ff00),
                                     ),
-                                    children: [
-                                      TextSpan(
-                                        text: 'Saldo Aktif\n',
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 15, top: 70),
+                            child: Text(
+                              'Rp ' + user.user_saldo.toString(),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'Poppins',
+                                fontSize: 13,
+                                fontWeight: FontWeight.w600,
+                                height: 1.5,
+                                color: Color(0xff000000),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 84, top: 57),
+                            child: Icon(
+                              Icons.error_outline_rounded,
+                              size: 12.52,
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 7, top: 107, right: 7),
+                            child: Container(
+                              padding: EdgeInsets.fromLTRB(20, 13, 20, 0),
+                              width: 399,
+                              height: 77,
+                              decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 255, 252, 252),
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color(0x3f000000),
+                                    offset: Offset(0, 4),
+                                    blurRadius: 2,
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.only(bottom: 7),
+                                    child: RichText(
+                                      text: TextSpan(
                                         style: TextStyle(
                                           fontFamily: 'Poppins',
                                           fontSize: 14,
@@ -188,88 +193,102 @@ class _HomePageState extends State<HomePage> {
                                           height: 1.5,
                                           color: Color(0xff000000),
                                         ),
-                                      ),
-                                      TextSpan(
-                                        text: 'Rp 0',
-                                        style: TextStyle(
-                                          fontFamily: 'Poppins',
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w700,
-                                          height: 1.5,
-                                          color: Color(0xff000000),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30, 0, 20, 0),
-                                    height: double.infinity,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        IconButton(
-                                          onPressed: () {
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (context) {
-                                                  return TopUpPage();
-                                                },
-                                              ),
-                                            );
-                                          },
-                                          icon: Icon(Icons
-                                              .account_balance_wallet_outlined),
-                                          color: Color(0xff0061af),
-                                          iconSize: 30,
-                                        ),
-                                        Text(
-                                          'Deposit',
-                                          style: TextStyle(
-                                            fontFamily: "Poppins",
-                                            fontSize: 11,
-                                            fontWeight: FontWeight.bold,
-                                            color: Color(0xff0061af),
+                                        children: [
+                                          TextSpan(
+                                            text: 'Saldo Aktif\n',
+                                            style: TextStyle(
+                                              fontFamily: 'Poppins',
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400,
+                                              height: 1.5,
+                                              color: Color(0xff000000),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                          TextSpan(
+                                            text: 'Rp 0',
+                                            style: TextStyle(
+                                              fontFamily: 'Poppins',
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w700,
+                                              height: 1.5,
+                                              color: Color(0xff000000),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                  Column(
+                                  Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(
-                                            Icons.arrow_circle_down_outlined),
-                                        color: Color(0xff0061af),
-                                        iconSize: 30,
-                                      ),
-                                      Text(
-                                        'Withdraw',
-                                        style: TextStyle(
-                                          fontFamily: "Poppins",
-                                          fontSize: 11,
-                                          fontWeight: FontWeight.bold,
-                                          color: Color(0xff0061af),
+                                      Container(
+                                        margin:
+                                            EdgeInsets.fromLTRB(30, 0, 20, 0),
+                                        height: double.infinity,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            IconButton(
+                                              onPressed: () {
+                                                Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                    builder: (context) {
+                                                      return TopUpPage();
+                                                    },
+                                                  ),
+                                                );
+                                              },
+                                              icon: Icon(Icons
+                                                  .account_balance_wallet_outlined),
+                                              color: Color(0xff0061af),
+                                              iconSize: 30,
+                                            ),
+                                            Text(
+                                              'Deposit',
+                                              style: TextStyle(
+                                                fontFamily: "Poppins",
+                                                fontSize: 11,
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xff0061af),
+                                              ),
+                                            ),
+                                          ],
                                         ),
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          IconButton(
+                                            onPressed: () {},
+                                            icon: Icon(Icons
+                                                .arrow_circle_down_outlined),
+                                            color: Color(0xff0061af),
+                                            iconSize: 30,
+                                          ),
+                                          Text(
+                                            'Withdraw',
+                                            style: TextStyle(
+                                              fontFamily: "Poppins",
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xff0061af),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
                                 ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ],
+                      ],
+                    );
+                  },
                 ),
               ),
               SizedBox(

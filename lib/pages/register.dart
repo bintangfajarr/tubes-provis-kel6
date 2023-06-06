@@ -254,76 +254,76 @@ class _RegisterPageState extends State<RegisterPage> {
             height: 20,
           ),
 
-          //bank
-          Container(
-            height: 47.0,
-            child: DropdownSearch<String>(
-              mode: Mode.DIALOG,
-              showSelectedItem: true,
-              items: bank,
-              label: "Pilih Bank",
-              hint: "Pilih Bank",
-              showSearchBox: true,
-              showClearButton: true,
-              popupTitle: Container(
-                padding: EdgeInsets.all(14.0),
-                child: Text(
-                  "Pilihan Bank",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "Poppins",
-                    color: Color.fromARGB(255, 0, 0, 0),
-                  ),
-                ),
-              ),
-              popupShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              popupItemBuilder: (context, item, isSelected) {
-                return Container(
-                  height: 40,
-                  alignment: Alignment.centerLeft,
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Color.fromARGB(255, 230, 230, 230),
-                        width: 1.0,
-                      ),
-                    ),
-                  ),
-                  child: Text(
-                    item,
-                    textAlign: TextAlign.left,
-                  ),
-                );
-              },
-            ),
-          ),
+          // //bank
+          // Container(
+          //   height: 47.0,
+          //   child: DropdownSearch<String>(
+          //     mode: Mode.DIALOG,
+          //     showSelectedItem: true,
+          //     items: bank,
+          //     label: "Pilih Bank",
+          //     hint: "Pilih Bank",
+          //     showSearchBox: true,
+          //     showClearButton: true,
+          //     popupTitle: Container(
+          //       padding: EdgeInsets.all(14.0),
+          //       child: Text(
+          //         "Pilihan Bank",
+          //         textAlign: TextAlign.center,
+          //         style: TextStyle(
+          //           fontSize: 20.0,
+          //           fontWeight: FontWeight.bold,
+          //           fontFamily: "Poppins",
+          //           color: Color.fromARGB(255, 0, 0, 0),
+          //         ),
+          //       ),
+          //     ),
+          //     popupShape: RoundedRectangleBorder(
+          //       borderRadius: BorderRadius.circular(20.0),
+          //     ),
+          //     popupItemBuilder: (context, item, isSelected) {
+          //       return Container(
+          //         height: 40,
+          //         alignment: Alignment.centerLeft,
+          //         padding: EdgeInsets.symmetric(horizontal: 10),
+          //         decoration: BoxDecoration(
+          //           border: Border(
+          //             bottom: BorderSide(
+          //               color: Color.fromARGB(255, 230, 230, 230),
+          //               width: 1.0,
+          //             ),
+          //           ),
+          //         ),
+          //         child: Text(
+          //           item,
+          //           textAlign: TextAlign.left,
+          //         ),
+          //       );
+          //     },
+          //   ),
+          // ),
 
-          SizedBox(
-            height: 20,
-          ),
+          // SizedBox(
+          //   height: 20,
+          // ),
 
-          //rekening
-          TextField(
-            keyboardType: TextInputType.number,
-            textInputAction: TextInputAction.done,
-            decoration: InputDecoration(
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              prefixIcon: Icon(Icons.wallet),
-              hintText: "Masukkan No. Rekening",
-              labelText: "Rekening",
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
+          // //rekening
+          // TextField(
+          //   keyboardType: TextInputType.number,
+          //   textInputAction: TextInputAction.done,
+          //   decoration: InputDecoration(
+          //     contentPadding:
+          //         EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          //     prefixIcon: Icon(Icons.wallet),
+          //     hintText: "Masukkan No. Rekening",
+          //     labelText: "Rekening",
+          //     border:
+          //         OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
+          //   ),
+          // ),
+          // SizedBox(
+          //   height: 20,
+          // ),
 
           //role
           Column(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tubes/pages/investor/account.dart';
 import 'package:tubes/pages/investor/home.dart';
 import 'package:tubes/pages/investor/market.dart';
+import 'package:tubes/pages/login.dart';
 
 import 'investor/activity.dart';
 
@@ -33,7 +35,10 @@ class _MyAppPageState extends State<MyAppPage> {
   }
 
   List showWidget = [
-    HomePage(),
+    BlocProvider(
+      create: (_) => UserCubit(),
+      child: HomePage(),
+    ),
     const Center(
       child: Text("Portofolio"),
     ),
