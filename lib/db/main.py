@@ -213,7 +213,7 @@ def tampil_semua_user():
 	finally:  	 
 		con.close()
 	return {"data":recs}
-
+            
 # UPDATE
 @app.patch("/update_user/{user_id}",response_model = UserPatch)
 def update_user(response: Response, user_id: int, u: UserPatch ):

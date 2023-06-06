@@ -73,6 +73,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+
   bool isHidden = true;
   @override
   Widget build(BuildContext context) {
@@ -112,6 +115,7 @@ class _LoginPageState extends State<LoginPage> {
 
           //email
           TextField(
+            controller: emailController,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
@@ -131,6 +135,7 @@ class _LoginPageState extends State<LoginPage> {
 
           //password
           TextField(
+            controller: passwordController,
             obscureText: isHidden,
             textInputAction: TextInputAction.done,
             decoration: InputDecoration(
