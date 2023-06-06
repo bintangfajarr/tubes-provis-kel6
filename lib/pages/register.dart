@@ -5,6 +5,8 @@ import 'package:tubes/pages/login.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+enum roleType { investor, borrower }
+
 class RegisterPage extends StatefulWidget {
   RegisterPage({super.key});
 
@@ -12,55 +14,11 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-enum roleType { investor, borrower }
-
 class _RegisterPageState extends State<RegisterPage> {
-  final namaEditController = TextEditingController();
-  final emailEditController = TextEditingController();
-  final telpEditController = TextEditingController();
-  final passwordEditController = TextEditingController();
-  String _nama = "";
-  String _email = "";
-  String _telp = "";
-  String _password = "";
-
-  @override
-  void dispose() {
-    // controller dibersihkan saat widget dibuang
-    namaEditController.dispose();
-    emailEditController.dispose();
-    telpEditController.dispose();
-    passwordEditController.dispose();
-    super.dispose();
-  }
-
-  Future<void> postDataToAPI() async {
-    final url = Uri.parse('http://localhost:8000/insert_user/');
-    final headers = {'content-type': 'application/json', 'server': 'uvicorn'};
-    final body = jsonEncode({
-      'user_nama': _nama,
-      'user_email': _email,
-      'user_no_telp': _telp,
-      'user_password': _password,
-      'user_role': 'admin',
-      'user_saldo': 0
-    });
-
-    try {
-      final response = await http.post(url, headers: headers, body: body);
-
-      if (response.statusCode == 200) {
-        // Request successful
-        print('API request successful');
-      } else {
-        // Error occurred
-        print('API request failed with status code: ${response.statusCode}');
-      }
-    } catch (e) {
-      // Exception occurred
-      print('An error occurred: $e');
-    }
-  }
+  final namaController = TextEditingController();
+  final emailController = TextEditingController();
+  final telpController = TextEditingController();
+  final passwordController = TextEditingController();
 
   bool isHidden = true;
   bool isHiddenn = true;
@@ -80,6 +38,81 @@ class _RegisterPageState extends State<RegisterPage> {
     "Bank BJB",
     "Bank Maybank",
   ];
+
+  @override
+  void dispose() {
+    // controller dibersihkan saat widget dibuang
+    namaController.dispose();
+    emailController.dispose();
+    telpController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  late Future<int> respPost; //201 artinya berhasil
+  String url = "http://127.0.0.1:8000/insert_user/";
+
+  @override
+  void initState() {
+    super.initState();
+    respPost = Future.value(0); //init
+  }
+
+  Future<void> insertUser(String nama, String email, String noTelp,
+      String password, String role, int saldo) async {
+    final url = 'http://localhost:8000/insert_user/';
+
+    final Map<String, dynamic> userData = {
+      'user_nama': nama,
+      'user_email': email,
+      'user_no_telp': noTelp,
+      'user_password': password,
+      'user_role': role,
+      'user_saldo': saldo,
+    };
+
+    final response = await http.post(
+      Uri.parse(url),
+      body: jsonEncode(userData),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      // User inserted successfully
+      register();
+      print('User berhasil ditambahkan');
+    } else {
+      // Error occurred while inserting user
+      print('Error saat menambahkan user');
+    }
+  }
+
+  void register() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+          ),
+        ),
+        backgroundColor: Color.fromARGB(255, 0, 97, 175),
+        content: Text(
+          "Berhasil Membuat Akun",
+          style: TextStyle(
+            fontFamily: "Poppins",
+          ),
+        ),
+      ),
+    );
+    Navigator.of(context).pop(
+      MaterialPageRoute(
+        builder: (context) {
+          return LoginPage();
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +137,7 @@ class _RegisterPageState extends State<RegisterPage> {
         children: [
           //nama
           TextField(
-            controller: namaEditController,
+            controller: namaController,
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
@@ -123,7 +156,7 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
 
           TextField(
-            controller: emailEditController,
+            controller: emailController,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
@@ -143,7 +176,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
           //password
           TextField(
-            controller: passwordEditController,
+            controller: passwordController,
             obscureText: isHidden,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
@@ -203,7 +236,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
           //telephone
           TextField(
-            controller: telpEditController,
+            controller: telpController,
             keyboardType: TextInputType.phone,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
@@ -366,38 +399,16 @@ class _RegisterPageState extends State<RegisterPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: () async {
-                    _nama = namaEditController.text;
-                    _email = emailEditController.text;
-                    _telp = telpEditController.text;
-                    _password = passwordEditController.text;
-
-                    await postDataToAPI();
-
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10),
-                          ),
-                        ),
-                        backgroundColor: Color.fromARGB(255, 0, 97, 175),
-                        content: Text(
-                          "Berhasil Membuat Akun",
-                          style: TextStyle(
-                            fontFamily: "Poppins",
-                          ),
-                        ),
-                      ),
-                    );
-                    Navigator.of(context).pop(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return LoginPage();
-                        },
-                      ),
-                    );
+                  onPressed: () {
+                    setState(() {
+                      insertUser(
+                          namaController.text,
+                          emailController.text,
+                          telpController.text,
+                          passwordController.text,
+                          "admin",
+                          0); //jika return 201 artinya sukses
+                    });
                   },
                   child: Text(
                     "Register",
