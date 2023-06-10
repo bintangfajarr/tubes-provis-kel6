@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tubes/pages/investor/account.dart';
 
 class ActivityPage extends StatefulWidget {
   @override
@@ -211,24 +212,27 @@ class _ActivityPageState extends State<ActivityPage> {
                       ],
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(52, 0, 44, 0),
-                    width: 335,
-                    height: 37,
-                    decoration: BoxDecoration(
-                      color: Color(0xff0061af),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Ringkasan transaksi',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          height: 1.5,
-                          color: Color(0xffffffff),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return AccountPage();
+                          },
+                        ),
+                      );
+                    },
+                    child: Text("Ringkasan Transaksi"),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                        Color.fromARGB(255, 0, 97, 175),
+                      ),
+                      fixedSize: MaterialStateProperty.all(
+                        Size(256.0, 32.0),
+                      ),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
                       ),
                     ),
