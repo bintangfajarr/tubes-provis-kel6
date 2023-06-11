@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:tubes/pages/investor/market.dart';
 
-class detailMitraPage extends StatelessWidget {
-  const detailMitraPage({
-    super.key,
-  });
+enum modal { nominal1, nominal2, nominal3, nominal4, nominal5 }
+
+class detailMitraPage extends StatefulWidget {
+  const detailMitraPage({super.key});
+  @override
+  State<detailMitraPage> createState() => _detailMitraPageState();
+}
+
+class _detailMitraPageState extends State<detailMitraPage> {
+  String textFieldValue = "";
+  final TextEditingController _textEditingController = TextEditingController();
+  int biayaModal = 1000;
+
+  int valueNominal = 0;
+  int result = 0;
+
+  modal? macamModal;
 
   @override
   Widget build(BuildContext context) {
@@ -483,9 +496,8 @@ class detailMitraPage extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 10.0),
+                    padding: EdgeInsets.only(left: 5.0),
                     height: 12,
-                    width: 400,
                     child: Text(
                       "Rp. 4.000.000",
                       style: TextStyle(
@@ -512,134 +524,192 @@ class detailMitraPage extends StatelessWidget {
             children: [
               TextField(
                 keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.next,
+                textInputAction: TextInputAction.done,
                 decoration: InputDecoration(
                   contentPadding:
-                      EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                   hintText: "Masukkan Nominal",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5)),
+                  border: UnderlineInputBorder(
+                    borderSide: BorderSide(width: 1.0),
+                  ),
                 ),
+                onChanged: (value) {
+                  setState(
+                    () {
+                      textFieldValue = value;
+                      valueNominal = int.parse(value);
+                      result = biayaModal;
+                    },
+                  );
+                },
+                controller: _textEditingController,
               ),
               SizedBox(
                 height: 20,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  OutlinedButton(
+                  ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return MarketPlacePage();
-                          },
-                        ),
-                      );
+                      setState(() {
+                        macamModal = modal.nominal1;
+                        _textEditingController.text = '500.000';
+                      });
                     },
                     child: Text(
                       "Rp500 rb",
                       style: TextStyle(
-                        color: Color.fromARGB(255, 0, 97, 175),
+                        color: macamModal == modal.nominal1
+                            ? Colors.white
+                            : Colors.black,
                       ),
                     ),
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                    style: ElevatedButton.styleFrom(
+                      primary: macamModal == modal.nominal1
+                          ? Color.fromARGB(255, 0, 97, 175)
+                          : Colors.white,
+                      onPrimary:
+                          Colors.blue, // Change the onPrimary color to blue
+                      side: BorderSide(
+                        color: macamModal == modal.nominal1
+                            ? Color.fromARGB(255, 255, 255, 255)
+                            : Color.fromARGB(255, 0, 162, 255),
                       ),
-                      side: MaterialStateProperty.all(
-                        BorderSide(
-                          color: Color.fromARGB(255, 0, 97, 175),
-                        ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                   ),
-                  OutlinedButton(
+                  ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return MarketPlacePage();
-                          },
-                        ),
-                      );
+                      setState(() {
+                        macamModal = modal.nominal2;
+                        _textEditingController.text = '1.000.000';
+                      });
                     },
                     child: Text(
                       "Rp1 jt",
                       style: TextStyle(
-                        color: Color.fromARGB(255, 0, 97, 175),
+                        color: macamModal == modal.nominal2
+                            ? Colors.white
+                            : Colors.black,
                       ),
                     ),
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                    style: ElevatedButton.styleFrom(
+                      primary: macamModal == modal.nominal2
+                          ? Color.fromARGB(255, 0, 97, 175)
+                          : Colors.white,
+                      onPrimary:
+                          Colors.blue, // Change the onPrimary color to blue
+                      side: BorderSide(
+                        color: macamModal == modal.nominal2
+                            ? Color.fromARGB(255, 255, 255, 255)
+                            : Color.fromARGB(255, 0, 162, 255),
                       ),
-                      side: MaterialStateProperty.all(
-                        BorderSide(
-                          color: Color.fromARGB(255, 0, 97, 175),
-                        ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                   ),
-                  OutlinedButton(
+                  ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return MarketPlacePage();
-                          },
-                        ),
-                      );
+                      setState(() {
+                        macamModal = modal.nominal3;
+                        _textEditingController.text = '2.000.000';
+                      });
                     },
                     child: Text(
                       "Rp2 jt",
                       style: TextStyle(
-                        color: Color.fromARGB(255, 0, 97, 175),
+                        color: macamModal == modal.nominal3
+                            ? Colors.white
+                            : Colors.black,
                       ),
                     ),
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                    style: ElevatedButton.styleFrom(
+                      primary: macamModal == modal.nominal3
+                          ? Color.fromARGB(255, 0, 97, 175)
+                          : Colors.white,
+                      onPrimary:
+                          Colors.blue, // Change the onPrimary color to blue
+                      side: BorderSide(
+                        color: macamModal == modal.nominal3
+                            ? Color.fromARGB(255, 255, 255, 255)
+                            : Color.fromARGB(255, 0, 162, 255),
                       ),
-                      side: MaterialStateProperty.all(
-                        BorderSide(
-                          color: Color.fromARGB(255, 0, 97, 175),
-                        ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                   ),
-                  OutlinedButton(
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return MarketPlacePage();
-                          },
-                        ),
-                      );
+                      setState(() {
+                        macamModal = modal.nominal4;
+                        _textEditingController.text = 'MAX';
+                      });
                     },
                     child: Text(
                       "Max",
                       style: TextStyle(
-                        color: Color.fromARGB(255, 0, 97, 175),
+                        color: macamModal == modal.nominal4
+                            ? Colors.white
+                            : Colors.black,
                       ),
                     ),
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                    style: ElevatedButton.styleFrom(
+                      primary: macamModal == modal.nominal4
+                          ? Color.fromARGB(255, 0, 97, 175)
+                          : Colors.white,
+                      onPrimary:
+                          Colors.blue, // Change the onPrimary color to blue
+                      side: BorderSide(
+                        color: macamModal == modal.nominal4
+                            ? Color.fromARGB(255, 255, 255, 255)
+                            : Color.fromARGB(255, 0, 162, 255),
                       ),
-                      side: MaterialStateProperty.all(
-                        BorderSide(
-                          color: Color.fromARGB(255, 0, 97, 175),
-                        ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        macamModal = modal.nominal5;
+                        _textEditingController.clear();
+                      });
+                    },
+                    child: Text(
+                      "Nominal Lain",
+                      style: TextStyle(
+                        color: macamModal == modal.nominal5
+                            ? Colors.white
+                            : Colors.black,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: macamModal == modal.nominal5
+                          ? Color.fromARGB(255, 0, 97, 175)
+                          : Colors.white,
+                      onPrimary:
+                          Colors.blue, // Change the onPrimary color to blue
+                      side: BorderSide(
+                        color: macamModal == modal.nominal5
+                            ? Color.fromARGB(255, 255, 255, 255)
+                            : Color.fromARGB(255, 0, 162, 255),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                   ),
