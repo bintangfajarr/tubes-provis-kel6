@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MarketPlacePage extends StatelessWidget {
-  const MarketPlacePage({
+class InvestorMarketplacePage extends StatelessWidget {
+  const InvestorMarketplacePage({
     super.key,
   });
 

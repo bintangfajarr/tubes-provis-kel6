@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:tubes/pages/investor/topup.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tubes/pages/investor/activity/topup_investor.dart';
 import 'package:tubes/pages/login.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:developer' as developer;
 
-class HomePage extends StatefulWidget {
+class InvestorHomePage extends StatefulWidget {
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<InvestorHomePage> createState() => _InvestorHomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _InvestorHomePageState extends State<InvestorHomePage> {
   int index = 0;
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,6 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                width: 412,
                 height: 186,
                 child: BlocBuilder<UserCubit, UserModel>(
                   buildWhen: (previousState, state) {
@@ -165,7 +164,6 @@ class _HomePageState extends State<HomePage> {
                                 left: 7, top: 107, right: 7),
                             child: Container(
                               padding: EdgeInsets.fromLTRB(20, 13, 20, 0),
-                              width: 399,
                               height: 77,
                               decoration: BoxDecoration(
                                 color: Color.fromARGB(255, 255, 252, 252),
@@ -235,7 +233,7 @@ class _HomePageState extends State<HomePage> {
                                                 Navigator.of(context).push(
                                                   MaterialPageRoute(
                                                     builder: (context) {
-                                                      return TopUpPage();
+                                                      return InvestorTopUpPage();
                                                     },
                                                   ),
                                                 );

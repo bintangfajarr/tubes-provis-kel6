@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tubes/pages/investor/account.dart';
-import 'package:tubes/pages/investor/home.dart';
-import 'package:tubes/pages/investor/market.dart';
+import 'package:tubes/pages/investor/account/account_investor.dart';
+import 'package:tubes/pages/investor/home/home_investor.dart';
+import 'package:tubes/pages/investor/marketplace/market_investor.dart';
+import 'package:tubes/pages/investor/portofolio/portofolio_investor.dart';
 import 'package:tubes/pages/login.dart';
 
-import 'investor/activity.dart';
+import 'activity/activity_investor.dart';
 
-class MyAppPage extends StatefulWidget {
-  const MyAppPage({super.key});
+class InvestorPage extends StatefulWidget {
+  const InvestorPage({super.key});
 
   @override
-  State<MyAppPage> createState() => _MyAppPageState();
+  State<InvestorPage> createState() => _InvestorPageState();
 }
 
-class _MyAppPageState extends State<MyAppPage> {
+class _InvestorPageState extends State<InvestorPage> {
   int index = 0;
 
   String _getAppBarTitle(int index) {
@@ -37,14 +38,12 @@ class _MyAppPageState extends State<MyAppPage> {
   List showWidget = [
     BlocProvider(
       create: (_) => UserCubit(),
-      child: HomePage(),
+      child: InvestorHomePage(),
     ),
-    const Center(
-      child: Text("Portofolio"),
-    ),
-    MarketPlacePage(),
-    ActivityPage(),
-    AccountPage(),
+    InvestorPortofolioPage(),
+    InvestorMarketplacePage(),
+    InvestorActivityPage(),
+    InvestorAccountPage(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -69,10 +68,6 @@ class _MyAppPageState extends State<MyAppPage> {
         currentIndex: index,
         selectedItemColor: const Color.fromARGB(255, 0, 97, 175),
         unselectedItemColor: Colors.grey[300],
-        selectedLabelStyle: TextStyle(
-          decoration: TextDecoration.underline,
-          decorationThickness: 2.0,
-        ),
         onTap: (value) {
           setState(() {
             index = value;

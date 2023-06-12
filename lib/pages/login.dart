@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:developer' as developer;
 
-import 'app.dart';
+import 'investor/Investor.dart';
 
 class UserModel {
   int user_id;
@@ -174,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) {
-                          return MyAppPage();
+                          return InvestorPage();
                         },
                       ),
                     );

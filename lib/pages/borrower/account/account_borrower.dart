@@ -1,14 +1,32 @@
 import 'package:flutter/material.dart';
 
-class AccountPage extends StatelessWidget {
-  const AccountPage({
+class BorrowerAccountPage extends StatelessWidget {
+  const BorrowerAccountPage({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: ListView(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Account",
+        ),
+        elevation: 0,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color.fromRGBO(0, 97, 175, 1),
+                Color.fromRGBO(188, 217, 241, 1),
+              ],
+            ),
+          ),
+        ),
+      ),
+      body: ListView(
         padding: const EdgeInsets.all(10),
         children: [
           const Text(

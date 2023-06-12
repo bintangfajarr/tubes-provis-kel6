@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class PortofolioPage extends StatefulWidget {
-  const PortofolioPage({super.key});
+class InvestorPortofolioPage extends StatefulWidget {
+  const InvestorPortofolioPage({super.key});
 
   @override
-  State<PortofolioPage> createState() => _PortofolioPageState();
+  State<InvestorPortofolioPage> createState() => _InvestorPortofolioPageState();
 }
 
-class _PortofolioPageState extends State<PortofolioPage> {
+class _InvestorPortofolioPageState extends State<InvestorPortofolioPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
