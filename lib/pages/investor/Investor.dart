@@ -43,7 +43,10 @@ class _InvestorPageState extends State<InvestorPage> {
     InvestorPortofolioPage(),
     InvestorMarketplacePage(),
     InvestorActivityPage(),
-    InvestorAccountPage(),
+    BlocProvider(
+      create: (_) => UserCubit(),
+      child: InvestorAccountPage(),
+    ),
   ];
   @override
   Widget build(BuildContext context) {

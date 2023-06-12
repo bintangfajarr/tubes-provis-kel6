@@ -37,7 +37,7 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                     return true;
                   },
                   builder: (context, user) {
-                    context.read<UserCubit>().fetchData();
+                    context.read<UserCubit>().getUser();
                     return Stack(
                       children: [
                         Align(

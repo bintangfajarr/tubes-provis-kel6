@@ -1,4 +1,10 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tubes/pages/landing.dart';
+
+import 'package:tubes/pages/login.dart';
 
 class InvestorAccountPage extends StatelessWidget {
   const InvestorAccountPage({
@@ -356,13 +362,40 @@ class InvestorAccountPage extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.read<UserCubit>().deleteUser().then((_) {
+                            Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return LandingPage();
+                                },
+                              ),
+                              (Route<dynamic> route) => false,
+                            );
+                          });
+                        },
                         icon: const Icon(Icons.arrow_forward_ios))
                   ],
                 )
               ],
             ),
           ),
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 32, right: 32, top: 20, bottom: 20),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Color.fromRGBO(0, 97, 175, 1)),
+              onPressed: () {},
+              child: Text(
+                "Logout",
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontSize: 18,
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
