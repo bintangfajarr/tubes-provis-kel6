@@ -10,6 +10,7 @@ import 'package:tubes/pages/investor/marketplace/detailmitra_investor.dart';
 import 'package:tubes/pages/landing.dart';
 import 'package:tubes/pages/login.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tubes/classes/auth.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,10 +21,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SafeArea(
-        child: LandingPage(),
+    return BlocProvider(
+      create: (_) => UserCubit(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: SafeArea(
+          child: LandingPage(),
+        ),
       ),
     );
   }

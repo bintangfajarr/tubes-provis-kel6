@@ -49,13 +49,9 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
-  late Future<int> respPost; //201 artinya berhasil
-  String url = "http://127.0.0.1:8000/insert_user/";
-
   @override
   void initState() {
     super.initState();
-    respPost = Future.value(0); //init
   }
 
   Future<void> insertUser(String nama, String email, String noTelp,

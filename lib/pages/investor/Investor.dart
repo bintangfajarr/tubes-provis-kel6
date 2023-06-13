@@ -5,6 +5,7 @@ import 'package:tubes/pages/investor/home/home_investor.dart';
 import 'package:tubes/pages/investor/marketplace/market_investor.dart';
 import 'package:tubes/pages/investor/portofolio/portofolio_investor.dart';
 import 'package:tubes/pages/login.dart';
+import 'package:tubes/classes/auth.dart';
 
 import 'activity/activity_investor.dart';
 
@@ -36,17 +37,11 @@ class _InvestorPageState extends State<InvestorPage> {
   }
 
   List showWidget = [
-    BlocProvider(
-      create: (_) => UserCubit(),
-      child: InvestorHomePage(),
-    ),
+    InvestorHomePage(),
     InvestorPortofolioPage(),
     InvestorMarketplacePage(),
     InvestorActivityPage(),
-    BlocProvider(
-      create: (_) => UserCubit(),
-      child: InvestorAccountPage(),
-    ),
+    InvestorAccountPage(),
   ];
   @override
   Widget build(BuildContext context) {

@@ -5,6 +5,7 @@ import 'package:tubes/pages/login.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:developer' as developer;
+import 'package:tubes/classes/auth.dart';
 
 class InvestorHomePage extends StatefulWidget {
   @override
@@ -116,7 +117,7 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                                     text: 'Total profit ',
                                   ),
                                   TextSpan(
-                                    text: 'Rp ' + user.user_saldo.toString(),
+                                    text: 'Rp 0',
                                     style: TextStyle(
                                       fontFamily: 'Poppins',
                                       fontSize: 8,
@@ -135,7 +136,7 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                           child: Padding(
                             padding: const EdgeInsets.only(left: 15, top: 70),
                             child: Text(
-                              'Rp ' + user.user_saldo.toString(),
+                              'Rp 0',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontFamily: 'Poppins',
@@ -203,7 +204,8 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                                             ),
                                           ),
                                           TextSpan(
-                                            text: 'Rp 0',
+                                            text: 'Rp ' +
+                                                user.user_saldo.toString(),
                                             style: TextStyle(
                                               fontFamily: 'Poppins',
                                               fontSize: 14,

@@ -1,4 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tubes/classes/auth.dart';
+import 'package:http/http.dart' as http;
 
 enum harga { nominal1, nominal2, nominal3, nominal4 }
 
@@ -20,6 +25,34 @@ class _InvestorTopUpPageState extends State<InvestorTopUpPage> {
 
   harga? macamHarga;
   metode? macamMetode;
+
+  Future<void> topUpSaldo(int value) async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? user_id = prefs.getString('user_id');
+    final url = 'http://localhost:8000/update_user/$user_id';
+
+    final Map<String, dynamic> topUpData = {
+      "user_nama": "kosong",
+      "user_email": "kosong",
+      "user_no_telp": "kosong",
+      "user_password": "kosong",
+      "user_role": "kosong",
+      'user_saldo': value,
+    };
+
+    final response = await http.patch(
+      Uri.parse(url),
+      body: jsonEncode(topUpData),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      print('Top up saldo berhasil!');
+    } else {
+      print('Error saat top up saldo');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,6 +134,7 @@ class _InvestorTopUpPageState extends State<InvestorTopUpPage> {
                               setState(() {
                                 macamHarga = value!;
                                 textFieldValue = '50.000';
+                                valueNominal = 50000;
                               });
                             },
                           ),
@@ -135,6 +169,7 @@ class _InvestorTopUpPageState extends State<InvestorTopUpPage> {
                               setState(() {
                                 macamHarga = value;
                                 textFieldValue = '100.000';
+                                valueNominal = 100000;
                               });
                             },
                           ),
@@ -174,6 +209,7 @@ class _InvestorTopUpPageState extends State<InvestorTopUpPage> {
                               setState(() {
                                 macamHarga = value;
                                 textFieldValue = '500.000';
+                                valueNominal = 500000;
                               });
                             },
                           ),
@@ -208,6 +244,7 @@ class _InvestorTopUpPageState extends State<InvestorTopUpPage> {
                               setState(() {
                                 macamHarga = value;
                                 textFieldValue = '1.000.000';
+                                valueNominal = 1000000;
                               });
                             },
                           ),
@@ -476,7 +513,27 @@ class _InvestorTopUpPageState extends State<InvestorTopUpPage> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    print(valueNominal + biayaTransaksi);
+                    setState(() {
+                      topUpSaldo(valueNominal);
+                      Navigator.of(context).pop();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                            ),
+                          ),
+                          backgroundColor: Color.fromARGB(255, 0, 97, 175),
+                          content: Text(
+                            "Top Up Saldo Berhasil!",
+                            style: TextStyle(
+                              fontFamily: "Poppins",
+                            ),
+                          ),
+                        ),
+                      );
+                    });
                   },
                   child: Text(
                     "Bayar",

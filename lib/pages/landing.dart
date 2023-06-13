@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tubes/pages/kebijakanreg.dart';
 import 'package:tubes/pages/login.dart';
+import 'package:tubes/classes/auth.dart';
 import 'package:tubes/pages/register.dart';
 import 'package:tubes/pages/syaratketentuan.dart';
 
@@ -57,10 +58,7 @@ class _LandingPageState extends State<LandingPage> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) {
-                          return BlocProvider(
-                            create: (_) => UserCubit(),
-                            child: const LoginPage(),
-                          );
+                          return LoginPage();
                         },
                       ),
                     );
