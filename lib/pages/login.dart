@@ -26,9 +26,6 @@ class _LoginPageState extends State<LoginPage> {
   bool isHidden = true;
 
   void _login() {
-    String email = emailController.text.trim();
-    String password = passwordController.text.trim();
-
     context
         .read<UserCubit>()
         .saveUser(emailController.text, passwordController.text)
