@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tubes/pages/borrower/activity/document_borrower.dart';
+import 'package:tubes/pages/borrower/activity/topup_borrower.dart';
+import 'package:tubes/pages/borrower/activity/withdraw_borrower.dart';
 
 class BorrowerActivityPage extends StatefulWidget {
   @override
@@ -19,15 +22,15 @@ class _BorrowerActivityPageState extends State<BorrowerActivityPage> {
                 height: 155,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10),
                   ),
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
                       Color.fromRGBO(0, 97, 175, 1),
-                      Color.fromRGBO(188, 217, 241, 1),
+                      Color.fromRGBO(18, 62, 99, 1),
                     ],
                   ),
                 ),
@@ -99,7 +102,15 @@ class _BorrowerActivityPageState extends State<BorrowerActivityPage> {
                               Column(
                                 children: [
                                   IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return BorrowerTopUpPage();
+                                          },
+                                        ),
+                                      );
+                                    },
                                     icon:
                                         Icon(Icons.add_circle_outline_rounded),
                                     color: Color(0xff0061af),
@@ -122,7 +133,15 @@ class _BorrowerActivityPageState extends State<BorrowerActivityPage> {
                               Column(
                                 children: [
                                   IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return BorrowerWithdrawPage();
+                                          },
+                                        ),
+                                      );
+                                    },
                                     icon:
                                         Icon(Icons.arrow_circle_down_outlined),
                                     color: Color(0xff0061af),
@@ -145,7 +164,15 @@ class _BorrowerActivityPageState extends State<BorrowerActivityPage> {
                               Column(
                                 children: [
                                   IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return BorrowerDocumentPage();
+                                          },
+                                        ),
+                                      );
+                                    },
                                     icon: Icon(Icons.file_copy_outlined),
                                     color: Color(0xff0061af),
                                     iconSize: 35,
@@ -174,7 +201,15 @@ class _BorrowerActivityPageState extends State<BorrowerActivityPage> {
           Padding(
             padding: EdgeInsets.fromLTRB(48, 10, 48, 0),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return RingkasanTransaksiPage();
+                    },
+                  ),
+                );
+              },
               child: Text(
                 "Ringkasan Transaksi",
                 style: TextStyle(
@@ -197,6 +232,540 @@ class _BorrowerActivityPageState extends State<BorrowerActivityPage> {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class RingkasanTransaksiPage extends StatefulWidget {
+  const RingkasanTransaksiPage({Key? key}) : super(key: key);
+
+  @override
+  State<RingkasanTransaksiPage> createState() => _RingkasanTransaksiPageState();
+}
+
+class _RingkasanTransaksiPageState extends State<RingkasanTransaksiPage> {
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        backgroundColor: Color.fromARGB(250, 250, 250, 250),
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_rounded),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            color: Colors.white,
+          ),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromRGBO(0, 97, 175, 1),
+                  Color.fromRGBO(18, 62, 99, 1),
+                ],
+              ),
+            ),
+          ),
+          centerTitle: true,
+          title: Text(
+            "Ringkasan Transaksi",
+            style: TextStyle(
+              fontFamily: "Poppins",
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          bottom: TabBar(
+            indicatorColor: Colors.white,
+            labelColor: Colors.white,
+            labelStyle: TextStyle(
+              fontFamily: "Poppins",
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),
+            tabs: [
+              Tab(
+                text: 'Mutasi Minggu Ini',
+              ),
+              Tab(
+                text: 'Seluruh Transaksi',
+              ),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            Container(
+              padding: EdgeInsets.only(left: 16, right: 16, top: 16),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Periode",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          "5 Jun 2023 - 11 Jun 2023",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Beginning Balance",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          "Rp. 0",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Top-Up",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          "Rp. 0",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Pokok",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          "Rp. 0",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Pokok Sebagian",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          "Rp. 0",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Bagi Hasil",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          "Rp. 0",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Bagi Hasil Sebagian",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          "Rp. 0",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Refund",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          "Rp. 0",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "PPh Bagi Hasil",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Rp. 0",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Asuransi",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          "Rp. 0",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Penarikan",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          "Rp. 0",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Pendanaan",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          "Rp. 0",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Ending Balance",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          "Rp. 0",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 20, right: 20),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Total Top-Up",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Rp. 0",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Total Penarikan Dana",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Rp. 0",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

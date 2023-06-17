@@ -46,7 +46,14 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                           child: Container(
                             height: 138,
                             decoration: BoxDecoration(
-                              color: Color(0xffbcd9f1),
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Color.fromRGBO(0, 97, 175, 1),
+                                  Color.fromRGBO(18, 62, 99, 1),
+                                ],
+                              ),
                               borderRadius: BorderRadius.only(
                                 bottomRight: Radius.circular(10),
                                 bottomLeft: Radius.circular(10),
@@ -66,7 +73,7 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
                                 height: 1.5,
-                                color: Color(0xff000000),
+                                color: Colors.white,
                               ),
                             ),
                           ),
@@ -78,6 +85,7 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                             child: Icon(
                               Icons.notifications_none_rounded,
                               size: 25,
+                              color: Colors.white,
                             ),
                           ),
                         ),
@@ -93,7 +101,7 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                                 fontSize: 10,
                                 fontWeight: FontWeight.w400,
                                 height: 1.5,
-                                color: Color(0xff000000),
+                                color: Colors.white,
                               ),
                             ),
                           ),
@@ -110,11 +118,15 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                                   fontSize: 8,
                                   fontWeight: FontWeight.w400,
                                   height: 1.5,
-                                  color: Color(0xff000000),
+                                  color: Colors.white,
                                 ),
                                 children: [
                                   TextSpan(
                                     text: 'Total profit ',
+                                    style: TextStyle(
+                                      fontFamily: "Poppins",
+                                      color: Colors.white,
+                                    ),
                                   ),
                                   TextSpan(
                                     text: 'Rp 0',
@@ -143,7 +155,7 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
                                 height: 1.5,
-                                color: Color(0xff000000),
+                                color: Colors.white,
                               ),
                             ),
                           ),
@@ -155,6 +167,7 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                             child: Icon(
                               Icons.error_outline_rounded,
                               size: 12.52,
+                              color: Colors.white,
                             ),
                           ),
                         ),

@@ -1,7 +1,9 @@
+import 'dart:io';
 import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tubes/pages/landing.dart';
 import 'package:tubes/classes/auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +11,16 @@ import 'package:tubes/classes/auth.dart';
 import 'dart:developer' as developer;
 
 class InvestorAccountPage extends StatelessWidget {
-  const InvestorAccountPage({
+  File? image;
+
+  Future getImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? imagePicked =
+        await picker.pickImage(source: ImageSource.gallery);
+    image = File(imagePicked!.path);
+  }
+
+  InvestorAccountPage({
     super.key,
   });
 
@@ -24,8 +35,152 @@ class InvestorAccountPage extends StatelessWidget {
       builder: (context, user) {
         return SafeArea(
           child: ListView(
-            padding: const EdgeInsets.all(10),
             children: [
+              Stack(
+                children: [
+                  Container(
+                    padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+                    height: 100,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      ),
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Color.fromRGBO(0, 97, 175, 1),
+                          Color.fromRGBO(18, 62, 99, 1),
+                        ],
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            "Account",
+                            style: TextStyle(
+                              fontFamily: "Poppins",
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: RichText(
+                            text: TextSpan(
+                              text: "Halo",
+                              style: TextStyle(
+                                fontFamily: "Poppins",
+                                color: Colors.white,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: ", ",
+                                ),
+                                TextSpan(
+                                  text: user.user_nama,
+                                  style: TextStyle(
+                                    fontFamily: "Poppins",
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(right: 16),
+                    height: 142,
+                    width: double.infinity,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          SizedBox(
+                            height: 36,
+                          ),
+                          image != null
+                              ? Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(53),
+                                      child: Container(
+                                        width: 106,
+                                        height: 106,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(50),
+                                      child: Image.file(
+                                        image!,
+                                        width: 100,
+                                        height: 100,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Positioned(
+                                      bottom: -7,
+                                      left: 61,
+                                      child: IconButton(
+                                        onPressed: () async {
+                                          await getImage();
+                                        },
+                                        icon: Icon(Icons.edit_square),
+                                        color: Color.fromRGBO(0, 97, 175, 1),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(53),
+                                      child: Container(
+                                        width: 106,
+                                        height: 106,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    CircleAvatar(
+                                      radius: 50,
+                                      backgroundImage: NetworkImage(
+                                        'https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png',
+                                      ),
+                                      backgroundColor: Colors.white,
+                                    ),
+                                    Positioned(
+                                      bottom: -7,
+                                      left: 61,
+                                      child: IconButton(
+                                        onPressed: () async {
+                                          await getImage();
+                                        },
+                                        icon: Icon(Icons.edit_square),
+                                        color: Color.fromRGBO(0, 97, 175, 1),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               const Text(
                 "Informasi Akun",
                 style: TextStyle(

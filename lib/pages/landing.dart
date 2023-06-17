@@ -120,7 +120,7 @@ class _LandingPageState extends State<LandingPage> {
             height: 16,
           ),
           Text(
-            "Dengan mendaftar anda telah menyetujui",
+            "Dengan mendaftar anda menyutujui",
             textAlign: TextAlign.center,
             style: TextStyle(fontFamily: "Poppins"),
           ),

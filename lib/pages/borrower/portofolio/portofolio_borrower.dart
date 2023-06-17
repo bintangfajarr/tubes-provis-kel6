@@ -27,7 +27,14 @@ class _BorrowerPortofolioPageState extends State<BorrowerPortofolioPage> {
                         height: 193,
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Color(0xffbcd9f1),
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Color.fromRGBO(0, 97, 175, 1),
+                                Color.fromRGBO(18, 62, 99, 1),
+                              ],
+                            ),
                             borderRadius: BorderRadius.only(
                               bottomRight: Radius.circular(10),
                               bottomLeft: Radius.circular(10),
@@ -49,7 +56,7 @@ class _BorrowerPortofolioPageState extends State<BorrowerPortofolioPage> {
                                 fontFamily: 'Poppins',
                                 fontSize: 19,
                                 fontWeight: FontWeight.w600,
-                                color: Color(0xff000000),
+                                color: Colors.white,
                               ),
                             ),
                           ),
@@ -60,7 +67,7 @@ class _BorrowerPortofolioPageState extends State<BorrowerPortofolioPage> {
                           style: TextStyle(
                             fontFamily: 'Poppins',
                             fontSize: 12,
-                            color: Color(0xff000000),
+                            color: Colors.white,
                           ),
                         ),
                         Text(
@@ -70,7 +77,7 @@ class _BorrowerPortofolioPageState extends State<BorrowerPortofolioPage> {
                             fontFamily: 'Poppins',
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xff000000),
+                            color: Colors.white,
                           ),
                         ),
                         Text(
@@ -79,7 +86,7 @@ class _BorrowerPortofolioPageState extends State<BorrowerPortofolioPage> {
                           style: TextStyle(
                             fontFamily: 'Poppins',
                             fontSize: 12,
-                            color: Color(0xff000000),
+                            color: Colors.white,
                           ),
                         ),
                       ],
@@ -165,114 +172,526 @@ class _BorrowerPortofolioPageState extends State<BorrowerPortofolioPage> {
                   ],
                 ),
               ),
-              Container(
-                // Add padding around the search bar
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                // Use a Material design search bar
-                child: TextField(
-                  // controller: _searchController,
-                  decoration: InputDecoration(
-                    hintText: 'Quick Search',
-                    // Add a clear button to the search bar
-                    suffixIcon: IconButton(
-                      icon: Icon(Icons.clear),
-                      onPressed: () {},
-                    ),
-                    // Add a search icon or button to the search bar
-                    prefixIcon: IconButton(
-                      icon: Icon(Icons.search),
-                      onPressed: () {
-                        // Perform the search here
-                      },
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20.0),
+                child: Text(
+                  "Sedang Berlangsung",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xff000000),
                   ),
                 ),
               ),
-              Column(children: [
-                SizedBox(
-                  height: 25,
-                ),
-                Align(
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
-                    width: 335,
-                    height: 98,
-                    decoration: BoxDecoration(
-                      color: Color(0xffffffff),
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color(0x3f000000),
-                          offset: Offset(0, 0),
-                          blurRadius: 2,
-                        ),
-                      ],
+              Container(
+                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                margin: EdgeInsets.only(bottom: 10),
+                width: 335,
+                height: 200,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 0,
+                      blurRadius: 4,
+                      offset: Offset(2, 4),
                     ),
-                    child: Column(
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Container(
+                              height: 60,
+                              width: 60,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: Colors.black,
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    Color.fromARGB(255, 0, 97, 175),
+                                    Color.fromARGB(255, 102, 178, 226)
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: 54,
+                              width: 54,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(
+                                      "https://picsum.photos/200/300"),
+                                ),
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 1,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Fauzan Ahmad",
+                                    style: TextStyle(
+                                      fontFamily: "Poppins",
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Modal Ternak Lele",
+                                    style: TextStyle(
+                                      fontFamily: "Poppins",
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.location_on_outlined,
+                                        size: 16,
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        "Riau",
+                                        style: TextStyle(
+                                          fontFamily: "Poppins",
+                                          fontSize: 10,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
                         Expanded(
                           child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              'Portofolio Investor',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 0, 0, 0),
-                              ),
+                            alignment: Alignment.topRight,
+                            child: Icon(
+                              Icons.add_circle_outline_rounded,
+                              color: Color.fromARGB(255, 0, 97, 175),
                             ),
                           ),
                         ),
                       ],
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-                Align(
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
-                    width: 335,
-                    height: 98,
-                    decoration: BoxDecoration(
-                      color: Color(0xffffffff),
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color(0x3f000000),
-                          offset: Offset(0, 0),
-                          blurRadius: 2,
+                    SizedBox(
+                      height: 25,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              "Total Tagihan",
+                              style: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              "Rp.5.000.000",
+                              style: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              "Total Dibayar",
+                              style: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              "Rp. 4.000.000",
+                              style: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              "Tenor",
+                              style: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              "50 Minggu",
+                              style: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                    child: Column(
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Column(
                       children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Stack(
+                              children: [
+                                Container(
+                                  height: 12,
+                                  width: 230,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[300],
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: 12,
+                                  width: 200,
+                                  decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 0, 97, 175),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(left: 10.0),
+                                  height: 12,
+                                  width: 200,
+                                  child: Text(
+                                    "Rp. 4.000.000",
+                                    style: TextStyle(
+                                        fontFamily: "Poppins",
+                                        fontSize: 8,
+                                        color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            ),
+                            Text(
+                              "80,0%",
+                              style: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10.0, top: 10.0),
+                child: Text(
+                  "Riwayat",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xff000000),
+                  ),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                margin: EdgeInsets.only(bottom: 10),
+                width: 335,
+                height: 200,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 0,
+                      blurRadius: 4,
+                      offset: Offset(2, 4),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Container(
+                              height: 60,
+                              width: 60,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: Colors.black,
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    Color.fromARGB(255, 0, 97, 175),
+                                    Color.fromARGB(255, 102, 178, 226)
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: 54,
+                              width: 54,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(
+                                      "https://picsum.photos/200/300"),
+                                ),
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 1,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Fauzan Ahmad",
+                                    style: TextStyle(
+                                      fontFamily: "Poppins",
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Modal Ternak Lele",
+                                    style: TextStyle(
+                                      fontFamily: "Poppins",
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.location_on_outlined,
+                                        size: 16,
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        "Riau",
+                                        style: TextStyle(
+                                          fontFamily: "Poppins",
+                                          fontSize: 10,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
                         Expanded(
                           child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              'Portofolio Investor',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 0, 0, 0),
-                              ),
+                            alignment: Alignment.topRight,
+                            child: Icon(
+                              Icons.add_circle_outline_rounded,
+                              color: Color.fromARGB(255, 0, 97, 175),
                             ),
                           ),
                         ),
                       ],
                     ),
-                  ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              "Total Tagihan",
+                              style: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              "Rp.5.000.000",
+                              style: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              "Total Dibayar",
+                              style: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              "Rp. 4.000.000",
+                              style: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              "Tenor",
+                              style: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              "50 Minggu",
+                              style: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Stack(
+                              children: [
+                                Container(
+                                  height: 12,
+                                  width: 230,
+                                  decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 0, 97, 175),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: 12,
+                                  width: 200,
+                                  decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 0, 97, 175),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(left: 10.0),
+                                  height: 12,
+                                  width: 200,
+                                  child: Text(
+                                    "Rp. 5.000.000",
+                                    style: TextStyle(
+                                        fontFamily: "Poppins",
+                                        fontSize: 8,
+                                        color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            ),
+                            Text(
+                              "100,0%",
+                              style: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    )
+                  ],
                 ),
-              ]),
+              ),
             ],
           ),
         ],

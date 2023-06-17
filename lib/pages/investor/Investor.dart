@@ -19,23 +19,6 @@ class InvestorPage extends StatefulWidget {
 class _InvestorPageState extends State<InvestorPage> {
   int index = 0;
 
-  String _getAppBarTitle(int index) {
-    switch (index) {
-      case 0:
-        return "Home";
-      case 1:
-        return "Portofolio";
-      case 2:
-        return "Marketplace";
-      case 3:
-        return "Activity";
-      case 4:
-        return "Account";
-      default:
-        return "";
-    }
-  }
-
   List showWidget = [
     InvestorHomePage(),
     InvestorPortofolioPage(),
@@ -46,19 +29,6 @@ class _InvestorPageState extends State<InvestorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        backgroundColor: const Color.fromARGB(255, 188, 217, 241),
-        title: Text(
-          _getAppBarTitle(index),
-          style: const TextStyle(
-            color: Color.fromARGB(255, 0, 0, 0),
-            fontFamily: "Poppins",
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
       body: SafeArea(
         child: showWidget[index],
       ),

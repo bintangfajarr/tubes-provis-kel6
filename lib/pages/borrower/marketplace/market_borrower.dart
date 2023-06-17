@@ -22,7 +22,7 @@ class BorrowerMarketplacePage extends StatelessWidget {
               end: Alignment.bottomCenter,
               colors: [
                 Color.fromRGBO(0, 97, 175, 1),
-                Color.fromRGBO(188, 217, 241, 1),
+                Color.fromRGBO(18, 62, 99, 1),
               ],
             ),
           ),

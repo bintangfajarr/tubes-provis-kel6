@@ -16,13 +16,20 @@ class _InvestorPortofolioPageState extends State<InvestorPortofolioPage> {
         children: [
           Container(
             padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
-            height: 100,
+            height: 154,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20),
               ),
-              color: Color.fromARGB(255, 188, 217, 241),
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromRGBO(0, 97, 175, 1),
+                  Color.fromRGBO(18, 62, 99, 1),
+                ],
+              ),
             ),
             child: Column(
               children: [
@@ -31,8 +38,26 @@ class _InvestorPortofolioPageState extends State<InvestorPortofolioPage> {
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
+                        "Portofolio",
+                        style: TextStyle(
+                          fontFamily: "Poppins",
+                          color: Colors.white,
+                          fontSize: 19,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
                         "Total Asetmu",
-                        style: TextStyle(fontFamily: "Poppins"),
+                        style: TextStyle(
+                          fontFamily: "Poppins",
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                     Align(
@@ -43,6 +68,7 @@ class _InvestorPortofolioPageState extends State<InvestorPortofolioPage> {
                           fontFamily: "Poppins",
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
+                          color: Colors.white,
                         ),
                       ),
                     ),
