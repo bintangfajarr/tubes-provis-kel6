@@ -566,10 +566,10 @@ class _DetailMitraPageState extends State<DetailMitraPage> {
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      primary: macamModal == modal.nominal1
+                      backgroundColor: macamModal == modal.nominal1
                           ? Color.fromARGB(255, 0, 97, 175)
                           : Colors.white,
-                      onPrimary:
+                      foregroundColor:
                           Colors.blue, // Change the onPrimary color to blue
                       side: BorderSide(
                         color: macamModal == modal.nominal1
@@ -597,10 +597,10 @@ class _DetailMitraPageState extends State<DetailMitraPage> {
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      primary: macamModal == modal.nominal2
+                      backgroundColor: macamModal == modal.nominal2
                           ? Color.fromARGB(255, 0, 97, 175)
                           : Colors.white,
-                      onPrimary:
+                      foregroundColor:
                           Colors.blue, // Change the onPrimary color to blue
                       side: BorderSide(
                         color: macamModal == modal.nominal2
@@ -628,10 +628,10 @@ class _DetailMitraPageState extends State<DetailMitraPage> {
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      primary: macamModal == modal.nominal3
+                      backgroundColor: macamModal == modal.nominal3
                           ? Color.fromARGB(255, 0, 97, 175)
                           : Colors.white,
-                      onPrimary:
+                      foregroundColor:
                           Colors.blue, // Change the onPrimary color to blue
                       side: BorderSide(
                         color: macamModal == modal.nominal3
@@ -667,10 +667,10 @@ class _DetailMitraPageState extends State<DetailMitraPage> {
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      primary: macamModal == modal.nominal4
+                      backgroundColor: macamModal == modal.nominal4
                           ? Color.fromARGB(255, 0, 97, 175)
                           : Colors.white,
-                      onPrimary:
+                      foregroundColor:
                           Colors.blue, // Change the onPrimary color to blue
                       side: BorderSide(
                         color: macamModal == modal.nominal4
@@ -698,10 +698,10 @@ class _DetailMitraPageState extends State<DetailMitraPage> {
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      primary: macamModal == modal.nominal5
+                      backgroundColor: macamModal == modal.nominal5
                           ? Color.fromARGB(255, 0, 97, 175)
                           : Colors.white,
-                      onPrimary:
+                      foregroundColor:
                           Colors.blue, // Change the onPrimary color to blue
                       side: BorderSide(
                         color: macamModal == modal.nominal5

@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 
-class ChangePasswordPage extends StatelessWidget {
+class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({
     super.key,
   });
 
   @override
+  State<ChangePasswordPage> createState() => _ChangePasswordPageState();
+}
+
+class _ChangePasswordPageState extends State<ChangePasswordPage> {
+  @override
   Widget build(BuildContext context) {
     final passwordLama = TextEditingController();
     final passwordBaru = TextEditingController();
     final passwordBaru2 = TextEditingController();
+    bool isHidden = true;
+    bool isHidden2 = true;
+    bool isHidden3 = true;
 
     return Scaffold(
       appBar: AppBar(
@@ -40,91 +48,79 @@ class ChangePasswordPage extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         children: [
           TextField(
-            obscureText: true,
             controller: passwordLama,
-            keyboardType: TextInputType.name,
+            obscureText: isHidden,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 16,
-              ),
-              hintText: "Masukkan Password Lama",
-              labelText: "Password Lama",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                  color: Color.fromARGB(255, 0, 97, 175),
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                  color: Color.fromARGB(255, 0, 97, 175),
-                  width: 2.0,
-                ),
-              ),
-            ),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                prefixIcon: Icon(Icons.lock),
+                suffixIcon: IconButton(
+                    onPressed: () {
+                      if (isHidden == true) {
+                        isHidden = false;
+                      } else {
+                        isHidden = true;
+                      }
+                      setState(() {});
+                    },
+                    icon: Icon(Icons.remove_red_eye)),
+                hintText: "Masukkan Password Lama",
+                labelText: "Masukkan Password Lama",
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(5))),
           ),
           SizedBox(
             height: 20,
           ),
           TextField(
-            obscureText: true,
             controller: passwordBaru,
-            keyboardType: TextInputType.name,
+            obscureText: isHidden2,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 16,
-              ),
-              hintText: "Masukkan Password Baru",
-              labelText: "Password Baru",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                  color: Color.fromARGB(255, 0, 97, 175),
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                  color: Color.fromARGB(255, 0, 97, 175),
-                  width: 2.0,
-                ),
-              ),
-            ),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                prefixIcon: Icon(Icons.lock),
+                suffixIcon: IconButton(
+                    onPressed: () {
+                      if (isHidden2 == true) {
+                        isHidden2 = false;
+                      } else {
+                        isHidden2 = true;
+                      }
+                      setState(() {});
+                    },
+                    icon: Icon(Icons.remove_red_eye)),
+                hintText: "Masukkan Password Baru",
+                labelText: "Masukkan Password Baru",
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(5))),
           ),
           SizedBox(
             height: 20,
           ),
           TextField(
-            obscureText: true,
             controller: passwordBaru2,
-            keyboardType: TextInputType.name,
+            obscureText: isHidden3,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 16,
-              ),
-              hintText: "Konfirmasi Password Baru",
-              labelText: "Konfirmasi",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                  color: Color.fromARGB(255, 0, 97, 175),
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                  color: Color.fromARGB(255, 0, 97, 175),
-                  width: 2.0,
-                ),
-              ),
-            ),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                prefixIcon: Icon(Icons.lock),
+                suffixIcon: IconButton(
+                    onPressed: () {
+                      if (isHidden == true) {
+                        isHidden = false;
+                      } else {
+                        isHidden = true;
+                      }
+                      setState(() {});
+                    },
+                    icon: Icon(Icons.remove_red_eye)),
+                hintText: "Masukkan Kembali Password Baru",
+                labelText: "Masukkan Kembali Password Baru",
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(5))),
           ),
           SizedBox(
             height: 20,

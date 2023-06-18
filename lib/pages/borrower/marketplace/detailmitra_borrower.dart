@@ -11,7 +11,7 @@ class BorrowerDetailMitraPage extends StatefulWidget {
 
 class _BorrowerDetailMitraPageState extends State<BorrowerDetailMitraPage> {
   String textFieldValue = "";
-  final TextEditingController _textEditingController = TextEditingController();
+  // final TextEditingController _textEditingController = TextEditingController();
   int biayaModal = 1000;
 
   int valueNominal = 0;

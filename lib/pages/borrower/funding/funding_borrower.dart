@@ -1,11 +1,15 @@
 import 'dart:io';
-import 'dart:isolate';
 import 'package:image_picker/image_picker.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:quickalert/quickalert.dart';
+import 'package:tubes/classes/auth.dart';
 import 'package:tubes/pages/borrower/borrower.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:developer' as developer;
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 enum genderType { male, female }
 
@@ -17,31 +21,39 @@ class BorrowerFundingPage extends StatefulWidget {
 }
 
 class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
+  final url_pemilik = 'http://localhost:8000/insert_pemilik/';
+  final url_umkm = 'http://localhost:8000/insert_umkm/';
+  final url_proyek = 'http://localhost:8000/insert_proyek/';
+
   int currentStep = 0;
 
   //data diri
   genderType? jenisGender;
   final namaLengkap = TextEditingController();
   final nik = TextEditingController();
-  final ttl = TextEditingController();
+  final tempatLahir = TextEditingController();
+  final tanggalLahir = TextEditingController();
   final alamat = TextEditingController();
   final pekerjaan = TextEditingController();
 
   String _jenisGender = "";
   String _namaLengkap = "";
   String _nik = "";
-  String _ttl = "";
+  String _tempatLahir = "";
+  String _tanggalLahir = "";
   String _alamat = "";
   String _pekerjaan = "";
 
   //detail usaha
   final namaUsaha = TextEditingController();
   final alamatUsaha = TextEditingController();
+  final deskripsiUsaha = TextEditingController();
   String selectedKategori = "";
 
   String _namaUsaha = "";
   String _kategoriUsaha = "";
   String _alamatUsaha = "";
+  String _deskripsiUsaha = "";
 
   List<String> usaha = [
     "Perdagangan dan Ritel",
@@ -91,6 +103,87 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
           _dateController.text = DateFormat('dd/MM/yyyy').format(_selectedDate);
         },
       );
+    }
+  }
+
+  Future<void> ajukanPendanaan(int user_id) async {
+    final Map<String, dynamic> pemilikData = {
+      "user_id": user_id,
+      "pemilik_nama": _namaLengkap,
+      "pemilik_nik": _nik,
+      "pemilik_tempat_lahir": _tempatLahir,
+      "pemilik_tanggal_lahir": _tanggalLahir,
+      "pemilik_jenis_kelamin": _jenisGender,
+      "pemilik_alamat": _alamat,
+      "pemilik_pekerjaan": _pekerjaan,
+    };
+
+    final responsePemilik = await http.post(
+      Uri.parse(url_pemilik),
+      body: jsonEncode(pemilikData),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (responsePemilik.statusCode == 200) {
+      final responsePemilikData = jsonDecode(responsePemilik.body);
+      developer.log(responsePemilikData.toString(), name: "pemiliklog1");
+      final pemilik = responsePemilikData['data'];
+      developer.log(pemilik.toString(), name: "pemiliklog2");
+      final int pemilik_id = pemilik[0];
+
+      final Map<String, dynamic> umkmData = {
+        "user_id": user_id,
+        "pemilik_id": pemilik_id,
+        "umkm_nama": _namaUsaha,
+        "umkm_kategori": _kategoriUsaha,
+        "umkm_alamat": _alamatUsaha,
+        "umkm_foto": 0,
+        "umkm_deskripsi": _deskripsiUsaha,
+      };
+
+      final responseUmkm = await http.post(
+        Uri.parse(url_umkm),
+        body: jsonEncode(umkmData),
+        headers: {'Content-Type': 'application/json'},
+      );
+
+      if (responseUmkm.statusCode == 200) {
+        final responseUmkmData = jsonDecode(responseUmkm.body);
+        final umkm = responseUmkmData['data'];
+        final int umkm_id = umkm[0];
+
+        final DateTime now = DateTime.now();
+        final DateFormat formatter = DateFormat('dd/MM/yyyy');
+        final String formattedDate = formatter.format(now);
+
+        final Map<String, dynamic> proyekData = {
+          "umkm_id": umkm_id,
+          "proyek_target": _targetPendanaan,
+          "proyek_terkumpul": 0,
+          "proyek_tgl_masuk": formattedDate,
+          "proyek_tgl_keluar": _batasWaktuPendanaan,
+        };
+
+        final responseProyek = await http.post(
+          Uri.parse(url_proyek),
+          body: jsonEncode(proyekData),
+          headers: {'Content-Type': 'application/json'},
+        );
+
+        if (responseProyek.statusCode == 200) {
+          print('Proyek berhasil ditambahkan');
+        } else {
+          print('Error saat menambahkan proyek');
+        }
+
+        print('UMKM berhasil ditambahkan');
+      } else {
+        print('Error saat menambahkan umkm');
+      }
+
+      print('Pemilik berhasil ditambahkan');
+    } else {
+      print('Error saat menambahkan pemilik');
     }
   }
 
@@ -177,15 +270,43 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
                 height: 20,
               ),
               TextField(
-                controller: ttl,
+                controller: tempatLahir,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.symmetric(
                     horizontal: 16,
                     vertical: 16,
                   ),
-                  hintText: "Masukkan Tempat, Tanggal Lahir",
-                  labelText: "Tempat, Tanggal Lahir",
+                  hintText: "Masukkan Tempat Lahir",
+                  labelText: "Tempat Lahir",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 0, 97, 175),
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 0, 97, 175),
+                      width: 2.0,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              TextField(
+                controller: tanggalLahir,
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 16,
+                  ),
+                  hintText: "Masukkan Tanggal Lahir",
+                  labelText: "Tanggal Lahir",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
@@ -376,7 +497,7 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
             children: [
               Center(
                 child: Text(
-                  "Data diri",
+                  "Data Usaha",
                   style: TextStyle(
                     fontFamily: "Poppins",
                     color: Colors.black,
@@ -485,6 +606,35 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
                   ),
                   hintText: "Masukkan Alamat Usaha",
                   labelText: "Alamat Usaha",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 0, 97, 175),
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 0, 97, 175),
+                      width: 2.0,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              TextField(
+                controller: deskripsiUsaha,
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.done,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 16,
+                  ),
+                  hintText: "Masukkan Deskripsi Usaha",
+                  labelText: "Deskripsi Usaha",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
@@ -797,7 +947,7 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
                     children: [
                       TableCell(
                         child: Text(
-                          "TTL",
+                          "Tempat Lahir",
                           style: TextStyle(
                             fontFamily: "Poppins",
                             fontWeight: FontWeight.bold,
@@ -807,7 +957,29 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
                       TableCell(
                         child: Text(
                           textAlign: TextAlign.right,
-                          "${_ttl}",
+                          "${_tempatLahir}",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  TableRow(
+                    children: [
+                      TableCell(
+                        child: Text(
+                          "Tanggal Lahir",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      TableCell(
+                        child: Text(
+                          textAlign: TextAlign.right,
+                          "${_tanggalLahir}",
                           style: TextStyle(
                             fontFamily: "Poppins",
                           ),
@@ -973,6 +1145,28 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
                       ),
                     ],
                   ),
+                  TableRow(
+                    children: [
+                      TableCell(
+                        child: Text(
+                          "Deskripsi Usaha",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      TableCell(
+                        child: Text(
+                          textAlign: TextAlign.right,
+                          "${_deskripsiUsaha}",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
               SizedBox(
@@ -1092,108 +1286,121 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
           color: Colors.black,
         ),
       ),
-      body: Theme(
-        data: Theme.of(context).copyWith(
-          colorScheme: ColorScheme.light(
-            primary: Color.fromARGB(255, 0, 97, 175),
-          ),
-        ),
-        child: Stepper(
-            type: StepperType.horizontal,
-            elevation: 0,
-            steps: getSteps(),
-            currentStep: currentStep,
-            onStepTapped: (step) => setState(
-                  () {
-                    currentStep = step;
-                  },
-                ),
-            onStepContinue: () {
-              final isLastStep = currentStep == getSteps().length - 1;
+      body: BlocBuilder<UserCubit, UserModel>(
+        buildWhen: (previousState, state) {
+          developer.log("${previousState.user_id} -> ${state.user_id}",
+              name: 'reloadlog');
+          return true;
+        },
+        builder: (context, user) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme: ColorScheme.light(
+                primary: Color.fromARGB(255, 0, 97, 175),
+              ),
+            ),
+            child: Stepper(
+                type: StepperType.horizontal,
+                elevation: 0,
+                steps: getSteps(),
+                currentStep: currentStep,
+                onStepTapped: (step) => setState(
+                      () {
+                        currentStep = step;
+                      },
+                    ),
+                onStepContinue: () {
+                  final isLastStep = currentStep == getSteps().length - 1;
 
-              if (isLastStep) {
-                QuickAlert.show(
-                  context: context,
-                  type: QuickAlertType.success,
-                  text: 'Pengajuan Berhasil Diajukan',
-                  confirmBtnColor: Color.fromARGB(255, 0, 97, 175),
-                  onConfirmBtnTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return BorrowerPage();
-                        },
-                      ),
+                  if (isLastStep) {
+                    QuickAlert.show(
+                      context: context,
+                      type: QuickAlertType.success,
+                      text: 'Pengajuan Berhasil Diajukan',
+                      confirmBtnColor: Color.fromARGB(255, 0, 97, 175),
+                      onConfirmBtnTap: () {
+                        ajukanPendanaan(user.user_id);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return BorrowerPage();
+                            },
+                          ),
+                        );
+                      },
                     );
-                  },
-                );
-                setState(() => isKonfirmasi = true);
-                print('Completed');
-              } else {
-                setState(() => currentStep += 1);
-                setState(
-                  () {
-                    //akses text data diri
-                    _namaLengkap = namaLengkap.text;
-                    _nik = nik.text;
-                    _ttl = ttl.text;
-                    _alamat = alamat.text;
-                    _pekerjaan = pekerjaan.text;
+                    setState(() => isKonfirmasi = true);
+                    print('Completed');
+                  } else {
+                    setState(() => currentStep += 1);
+                    setState(
+                      () {
+                        //akses text data diri
+                        _namaLengkap = namaLengkap.text;
+                        _nik = nik.text;
+                        _tempatLahir = tempatLahir.text;
+                        _tanggalLahir = tanggalLahir.text;
+                        _alamat = alamat.text;
+                        _pekerjaan = pekerjaan.text;
 
-                    //akses text detail usaha
-                    _namaUsaha = namaUsaha.text;
-                    _alamatUsaha = alamatUsaha.text;
-                    _kategoriUsaha = selectedKategori;
+                        //akses text detail usaha
+                        _namaUsaha = namaUsaha.text;
+                        _alamatUsaha = alamatUsaha.text;
+                        _kategoriUsaha = selectedKategori;
+                        _deskripsiUsaha = deskripsiUsaha.text;
 
-                    //akses text pendanaan usaha
-                    _targetPendanaan = targetPendanaan.text;
-                    _batasWaktuPendanaan = _dateController.text;
-                    _deskripsiPendanaan = deskripsiPendanaan.text;
-                  },
-                );
-              }
-            },
-            onStepCancel: currentStep == 0
-                ? null
-                : () => setState(
-                      () => currentStep -= 1,
-                    ),
-            controlsBuilder: (BuildContext context, ControlsDetails details) {
-              final isLastStep = currentStep == getSteps().length - 1;
-              return Container(
-                padding: EdgeInsets.all(20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: details.onStepContinue,
-                        child: Text(
-                          isLastStep ? 'Confirm' : 'Next',
+                        //akses text pendanaan usaha
+                        _targetPendanaan = targetPendanaan.text;
+                        _batasWaktuPendanaan = _dateController.text;
+                        _deskripsiPendanaan = deskripsiPendanaan.text;
+                      },
+                    );
+                  }
+                },
+                onStepCancel: currentStep == 0
+                    ? null
+                    : () => setState(
+                          () => currentStep -= 1,
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    if (currentStep != 0)
-                      Expanded(
-                        child: OutlinedButton(
-                          onPressed: details.onStepCancel,
-                          child: Text('Back'),
-                          style: ButtonStyle(
-                            side: MaterialStateProperty.all(
-                              BorderSide(
-                                color: Color.fromARGB(255, 0, 97, 175),
-                              ),
+                controlsBuilder:
+                    (BuildContext context, ControlsDetails details) {
+                  final isLastStep = currentStep == getSteps().length - 1;
+                  return Container(
+                    padding: EdgeInsets.all(20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: details.onStepContinue,
+                            child: Text(
+                              isLastStep ? 'Confirm' : 'Next',
                             ),
                           ),
                         ),
-                      ),
-                  ],
-                ),
-              );
-            }),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        if (currentStep != 0)
+                          Expanded(
+                            child: OutlinedButton(
+                              onPressed: details.onStepCancel,
+                              child: Text('Back'),
+                              style: ButtonStyle(
+                                side: MaterialStateProperty.all(
+                                  BorderSide(
+                                    color: Color.fromARGB(255, 0, 97, 175),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  );
+                }),
+          );
+        },
       ),
     );
   }

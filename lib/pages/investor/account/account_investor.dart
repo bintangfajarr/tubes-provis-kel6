@@ -1,16 +1,22 @@
 import 'dart:io';
-import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tubes/pages/landing.dart';
 import 'package:tubes/classes/auth.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tubes/classes/auth.dart';
 import 'dart:developer' as developer;
 
-class InvestorAccountPage extends StatelessWidget {
+class InvestorAccountPage extends StatefulWidget {
+  InvestorAccountPage({
+    super.key,
+  });
+
+  @override
+  State<InvestorAccountPage> createState() => _InvestorAccountPageState();
+}
+
+class _InvestorAccountPageState extends State<InvestorAccountPage> {
   File? image;
 
   Future getImage() async {
@@ -19,10 +25,6 @@ class InvestorAccountPage extends StatelessWidget {
         await picker.pickImage(source: ImageSource.gallery);
     image = File(imagePicked!.path);
   }
-
-  InvestorAccountPage({
-    super.key,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -157,9 +159,9 @@ class InvestorAccountPage extends StatelessWidget {
                                     ),
                                     CircleAvatar(
                                       radius: 50,
-                                      backgroundImage: NetworkImage(
-                                        'https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png',
-                                      ),
+                                      // backgroundImage: NetworkImage(
+                                      //   'https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png',
+                                      // ),
                                       backgroundColor: Colors.white,
                                     ),
                                     Positioned(

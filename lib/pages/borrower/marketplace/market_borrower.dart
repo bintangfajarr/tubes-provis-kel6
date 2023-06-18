@@ -1,7 +1,4 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:tubes/pages/investor/marketplace/detailmitra_investor.dart';
 
 import 'detailmitra_borrower.dart';
 

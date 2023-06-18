@@ -1,11 +1,7 @@
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tubes/pages/register.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:developer' as developer;
 import 'package:jwt_decode/jwt_decode.dart';
 
 class UserModel {
@@ -46,40 +42,37 @@ class UserCubit extends Cubit<UserModel> {
     getUser();
   }
 
-  Future<UserModel> getDecodedUser() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    Map<String, dynamic> decodedToken =
-        Jwt.parseJwt(prefs.getString('token') ?? "");
-
-    return UserModel(
-      user_id: decodedToken['user_id'],
-      user_nama: decodedToken['user_nama'],
-      user_email: decodedToken['user_email'],
-      user_no_telp: decodedToken['user_no_telp'],
-      user_password: decodedToken['user_password'],
-      user_role: decodedToken['user_role'],
-      user_saldo: decodedToken['user_saldo'],
-    );
-  }
-
   Future<void> getUser() async {
     final prefs = await SharedPreferences.getInstance();
 
-    Map<String, dynamic> decodedToken =
-        Jwt.parseJwt(prefs.getString('token') ?? "");
+    if (prefs.getString('token') == null) {
+      emit(
+        UserModel(
+          user_id: 0,
+          user_nama: "",
+          user_email: "",
+          user_no_telp: "",
+          user_password: "",
+          user_role: "",
+          user_saldo: 0,
+        ),
+      );
+    } else {
+      Map<String, dynamic> decodedToken =
+          Jwt.parseJwt(prefs.getString('token') ?? "");
 
-    emit(
-      UserModel(
-        user_id: decodedToken['user_id'],
-        user_nama: decodedToken['user_nama'],
-        user_email: decodedToken['user_email'],
-        user_no_telp: decodedToken['user_no_telp'],
-        user_password: decodedToken['user_password'],
-        user_role: decodedToken['user_role'],
-        user_saldo: decodedToken['user_saldo'],
-      ),
-    );
+      emit(
+        UserModel(
+          user_id: decodedToken['user_id'],
+          user_nama: decodedToken['user_nama'],
+          user_email: decodedToken['user_email'],
+          user_no_telp: decodedToken['user_no_telp'],
+          user_password: decodedToken['user_password'],
+          user_role: decodedToken['user_role'],
+          user_saldo: decodedToken['user_saldo'],
+        ),
+      );
+    }
   }
 
   Future<void> saveUser(String email, String password) async {

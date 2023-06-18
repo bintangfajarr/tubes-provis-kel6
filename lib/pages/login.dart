@@ -1,19 +1,11 @@
 /* import */
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tubes/pages/landing.dart';
 import 'package:tubes/pages/middleware.dart';
 import 'package:tubes/pages/register.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'dart:developer' as developer;
-import 'package:jwt_decode/jwt_decode.dart';
 import 'package:tubes/classes/auth.dart';
-
-import 'investor/Investor.dart';
-import 'borrower/borrower.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -27,8 +19,6 @@ class _LoginPageState extends State<LoginPage> {
   var passwordController = TextEditingController();
 
   bool isHidden = true;
-
-  void _login() {}
 
   @override
   Widget build(BuildContext context) {
