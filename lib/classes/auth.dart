@@ -46,6 +46,23 @@ class UserCubit extends Cubit<UserModel> {
     getUser();
   }
 
+  Future<UserModel> getDecodedUser() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    Map<String, dynamic> decodedToken =
+        Jwt.parseJwt(prefs.getString('token') ?? "");
+
+    return UserModel(
+      user_id: decodedToken['user_id'],
+      user_nama: decodedToken['user_nama'],
+      user_email: decodedToken['user_email'],
+      user_no_telp: decodedToken['user_no_telp'],
+      user_password: decodedToken['user_password'],
+      user_role: decodedToken['user_role'],
+      user_saldo: decodedToken['user_saldo'],
+    );
+  }
+
   Future<void> getUser() async {
     final prefs = await SharedPreferences.getInstance();
 

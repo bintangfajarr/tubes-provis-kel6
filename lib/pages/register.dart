@@ -25,6 +25,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
   roleType? jenisRole;
 
+  String roleString = "";
+
   List<String> bank = [
     "Bank Central Asia",
     "Bank Mandiri",
@@ -339,9 +341,12 @@ class _RegisterPageState extends State<RegisterPage> {
                             value: roleType.investor,
                             groupValue: jenisRole,
                             onChanged: (roleType? value) {
-                              setState(() {
-                                jenisRole = value;
-                              });
+                              setState(
+                                () {
+                                  jenisRole = value;
+                                  roleString = "investor";
+                                },
+                              );
                             },
                           ),
                           Expanded(
@@ -369,6 +374,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             onChanged: (roleType? value) {
                               setState(() {
                                 jenisRole = value;
+                                roleString = "borrower";
                               });
                             },
                           ),
@@ -402,7 +408,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           emailController.text,
                           telpController.text,
                           passwordController.text,
-                          "admin",
+                          roleString,
                           0); //jika return 201 artinya sukses
                     });
                   },

@@ -32,11 +32,6 @@ class _InvestorTopUpPageState extends State<InvestorTopUpPage> {
     final url = 'http://localhost:8000/update_user/$user_id';
 
     final Map<String, dynamic> topUpData = {
-      "user_nama": "kosong",
-      "user_email": "kosong",
-      "user_no_telp": "kosong",
-      "user_password": "kosong",
-      "user_role": "kosong",
       'user_saldo': value,
     };
 
@@ -522,12 +517,13 @@ class _InvestorTopUpPageState extends State<InvestorTopUpPage> {
                     onPressed: () {
                       setState(() {
                         topUpSaldo(
-                            user.user_id, user.user_saldo + valueNominal);
-
-                        context
-                            .read<UserCubit>()
-                            .saveUser(user.user_email, user.user_password);
-
+                          user.user_id,
+                          user.user_saldo + valueNominal,
+                        );
+                        context.read<UserCubit>().saveUser(
+                              user.user_email,
+                              user.user_password,
+                            );
                         Navigator.of(context).pop();
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(

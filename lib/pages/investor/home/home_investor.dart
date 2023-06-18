@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:developer' as developer;
 import 'package:tubes/classes/auth.dart';
+import 'package:tubes/classes/format.dart';
 
 class InvestorHomePage extends StatefulWidget {
   @override
@@ -218,7 +219,9 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                                           ),
                                           TextSpan(
                                             text: 'Rp ' +
-                                                user.user_saldo.toString(),
+                                                Format.moneyFormat(
+                                                  user.user_saldo,
+                                                ),
                                             style: TextStyle(
                                               fontFamily: 'Poppins',
                                               fontSize: 14,
