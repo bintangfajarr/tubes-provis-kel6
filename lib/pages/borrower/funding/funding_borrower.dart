@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:tubes/pages/borrower/borrower.dart';
-import 'package:tubes/pages/borrower/home/home_borrower.dart';
 
 enum genderType { male, female }
 

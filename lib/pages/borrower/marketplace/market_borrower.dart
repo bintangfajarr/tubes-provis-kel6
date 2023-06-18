@@ -1,6 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:tubes/pages/investor/marketplace/detailmitra_investor.dart';
+
+import 'detailmitra_borrower.dart';
 
 class BorrowerMarketplacePage extends StatelessWidget {
   const BorrowerMarketplacePage({
@@ -35,7 +38,7 @@ class BorrowerMarketplacePage extends StatelessWidget {
         ],
       ),
       body: ListView(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(16),
         children: [
           Container(
             // Add padding around the search bar
@@ -186,8 +189,17 @@ class BorrowerMarketplacePage extends StatelessWidget {
                             Expanded(
                               child: Align(
                                 alignment: Alignment.topRight,
-                                child: Icon(
-                                  Icons.add_circle_outline_rounded,
+                                child: IconButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) {
+                                          return BorrowerDetailMitraPage();
+                                        },
+                                      ),
+                                    );
+                                  },
+                                  icon: Icon(Icons.add_circle_outline_rounded),
                                   color: Color.fromARGB(255, 0, 97, 175),
                                 ),
                               ),
