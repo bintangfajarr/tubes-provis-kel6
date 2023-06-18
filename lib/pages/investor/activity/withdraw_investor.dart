@@ -41,15 +41,25 @@ class _InvestorWithdrawPageState extends State<InvestorWithdrawPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color.fromRGBO(0, 97, 175, 1),
+                Color.fromRGBO(18, 62, 99, 1),
+              ],
+            ),
+          ),
+        ),
         centerTitle: true,
         title: Text(
           "Tarik Saldo",
           style: TextStyle(
             fontFamily: "Poppins",
             fontWeight: FontWeight.bold,
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
       ),

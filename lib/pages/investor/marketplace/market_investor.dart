@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'detailmitra_investor.dart';
+
 class InvestorMarketplacePage extends StatelessWidget {
   const InvestorMarketplacePage({
     super.key,
@@ -34,24 +36,17 @@ class InvestorMarketplacePage extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         children: [
           Container(
-            // Add padding around the search bar
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            // Use a Material design search bar
             child: TextField(
-              // controller: _searchController,
               decoration: InputDecoration(
                 hintText: 'Quick Search',
-                // Add a clear button to the search bar
                 suffixIcon: IconButton(
                   icon: Icon(Icons.clear),
                   onPressed: () {},
                 ),
-                // Add a search icon or button to the search bar
                 prefixIcon: IconButton(
                   icon: Icon(Icons.search),
-                  onPressed: () {
-                    // Perform the search here
-                  },
+                  onPressed: () {},
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20.0),
@@ -182,9 +177,19 @@ class InvestorMarketplacePage extends StatelessWidget {
                             Expanded(
                               child: Align(
                                 alignment: Alignment.topRight,
-                                child: Icon(
-                                  Icons.add_circle_outline_rounded,
-                                  color: Color.fromARGB(255, 0, 97, 175),
+                                child: IconButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) {
+                                          return DetailMitraPage();
+                                        },
+                                      ),
+                                    );
+                                  },
+                                  icon: Icon(Icons.add_circle_outline_rounded),
+                                  color: Color(0xff0061af),
+                                  iconSize: 30,
                                 ),
                               ),
                             ),

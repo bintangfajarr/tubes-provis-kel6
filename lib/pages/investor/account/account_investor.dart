@@ -3,6 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tubes/pages/investor/account/changepw_investor.dart';
+import 'package:tubes/pages/investor/account/kebijakanreg_investor.dart';
+import 'package:tubes/pages/investor/account/pusatbantuan_investor.dart';
+import 'package:tubes/pages/investor/account/risikopendanaan_investor.dart';
+import 'package:tubes/pages/investor/account/syaratketentuan_investor.dart';
 import 'package:tubes/pages/landing.dart';
 import 'package:tubes/classes/auth.dart';
 import 'dart:developer' as developer;
@@ -105,7 +110,7 @@ class _InvestorAccountPageState extends State<InvestorAccountPage> {
                     height: 142,
                     width: double.infinity,
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 16),
+                      padding: EdgeInsets.only(left: 16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
@@ -158,10 +163,10 @@ class _InvestorAccountPageState extends State<InvestorAccountPage> {
                                       ),
                                     ),
                                     CircleAvatar(
-                                      radius: 50,
-                                      // backgroundImage: NetworkImage(
-                                      //   'https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png',
-                                      // ),
+                                      radius: 53,
+                                      backgroundImage: NetworkImage(
+                                        'https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png',
+                                      ),
                                       backgroundColor: Colors.white,
                                     ),
                                     Positioned(
@@ -183,23 +188,26 @@ class _InvestorAccountPageState extends State<InvestorAccountPage> {
                   ),
                 ],
               ),
-              const Text(
-                "Informasi Akun",
-                style: TextStyle(
+              Divider(
+                color: Colors.black12,
+                thickness: 3,
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 16, right: 16),
+                child: Text(
+                  "Informasi Akun",
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
-                    fontFamily: 'Poppins'),
-              ),
-              const SizedBox(height: 20),
-              Container(
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: Colors.black,
-                      width: 1.0,
-                    ),
+                    fontFamily: 'Poppins',
                   ),
                 ),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 16, right: 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -217,19 +225,14 @@ class _InvestorAccountPageState extends State<InvestorAccountPage> {
                         fontSize: 18,
                       ),
                     ),
+                    Divider(
+                      color: Colors.black26,
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(height: 8),
-              Container(
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: Colors.black,
-                      width: 1.0,
-                    ),
-                  ),
-                ),
+              Padding(
+                padding: EdgeInsets.only(left: 16, right: 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -240,26 +243,34 @@ class _InvestorAccountPageState extends State<InvestorAccountPage> {
                           fontSize: 18,
                           fontWeight: FontWeight.bold),
                     ),
-                    Text(
-                      user.user_password,
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 18,
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 0, 97, 175),
                       ),
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return InvestorChangePasswordPage();
+                            },
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Ganti Password",
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                        ),
+                      ),
+                    ),
+                    Divider(
+                      color: Colors.black26,
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 8),
-              Container(
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: Colors.black,
-                      width: 1.0,
-                    ),
-                  ),
-                ),
+              Padding(
+                padding: EdgeInsets.only(left: 16, right: 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -277,19 +288,14 @@ class _InvestorAccountPageState extends State<InvestorAccountPage> {
                         fontSize: 18,
                       ),
                     ),
+                    Divider(
+                      color: Colors.black26,
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(height: 8),
-              Container(
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: Colors.black,
-                      width: 1.0,
-                    ),
-                  ),
-                ),
+              Padding(
+                padding: EdgeInsets.only(left: 16, right: 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -307,23 +313,18 @@ class _InvestorAccountPageState extends State<InvestorAccountPage> {
                         fontSize: 18,
                       ),
                     ),
+                    Divider(
+                      color: Colors.black26,
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(height: 8),
-              Container(
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: Colors.black,
-                      width: 1.0,
-                    ),
-                  ),
-                ),
+              Padding(
+                padding: EdgeInsets.only(left: 16, right: 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       "Surat Perjanjian Pendanaan",
                       style: TextStyle(
                           fontFamily: 'Poppins',
@@ -332,60 +333,44 @@ class _InvestorAccountPageState extends State<InvestorAccountPage> {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromARGB(255, 0, 97, 175)),
+                          backgroundColor: Color.fromARGB(255, 0, 97, 175)),
                       onPressed: () {},
-                      child: const Text(
+                      child: Text(
                         "Dokumen",
                         style: TextStyle(
                           fontFamily: 'Poppins',
-                          fontSize: 18,
                         ),
                       ),
-                    )
+                    ),
+                    Divider(
+                      color: Colors.black26,
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(height: 8),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 0, 97, 175)),
-                    onPressed: () {},
-                    child: const Text(
-                      "Edit Informasi",
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 18,
-                      ),
-                    ),
-                  )
-                ],
+              Divider(
+                color: Colors.black12,
+                thickness: 3,
               ),
-              const SizedBox(height: 20),
-              const Text(
-                "Informasi Akun Bank",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    fontFamily: 'Poppins'),
-              ),
-              const SizedBox(height: 20),
-              Container(
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: Colors.black,
-                      width: 1.0,
-                    ),
-                  ),
+              Padding(
+                padding: EdgeInsets.only(left: 16, right: 16),
+                child: Text(
+                  "Informasi Akun Bank",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      fontFamily: 'Poppins'),
                 ),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 16, right: 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       "Akun Bank Saya",
                       style: TextStyle(
                           fontFamily: 'Poppins',
@@ -394,45 +379,47 @@ class _InvestorAccountPageState extends State<InvestorAccountPage> {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromARGB(255, 0, 97, 175)),
+                          backgroundColor: Color.fromARGB(255, 0, 97, 175)),
                       onPressed: () {},
-                      child: const Text(
+                      child: Text(
                         "Tambah Rekening",
                         style: TextStyle(
                           fontFamily: 'Poppins',
-                          fontSize: 18,
                         ),
                       ),
-                    )
+                    ),
+                    Divider(
+                      color: Colors.black26,
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
-              const Text(
-                "Informasi Lainnya",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    fontFamily: 'Poppins'),
+              Divider(
+                color: Colors.black12,
+                thickness: 3,
               ),
-              const SizedBox(height: 10),
-              Container(
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: Colors.black,
-                      width: 1.0,
-                    ),
-                  ),
+              Padding(
+                padding: EdgeInsets.only(left: 16, right: 16),
+                child: Text(
+                  "Informasi Lainnya",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      fontFamily: 'Poppins'),
                 ),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 16, right: 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           "Pusat Bantuan",
                           style: TextStyle(
                             fontFamily: 'Poppins',
@@ -440,29 +427,34 @@ class _InvestorAccountPageState extends State<InvestorAccountPage> {
                           ),
                         ),
                         IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.arrow_forward_ios))
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return InvestorPusatBantuanPage();
+                                },
+                              ),
+                            );
+                          },
+                          icon: Icon(Icons.arrow_forward_ios),
+                        ),
                       ],
-                    )
+                    ),
+                    Divider(
+                      color: Colors.black26,
+                    ),
                   ],
                 ),
               ),
-              Container(
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: Colors.black,
-                      width: 1.0,
-                    ),
-                  ),
-                ),
+              Padding(
+                padding: EdgeInsets.only(left: 16, right: 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           "Resiko Pendanaan",
                           style: TextStyle(
                             fontFamily: 'Poppins',
@@ -470,29 +462,36 @@ class _InvestorAccountPageState extends State<InvestorAccountPage> {
                           ),
                         ),
                         IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.arrow_forward_ios))
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return InvestorRisikoPendanaanPage();
+                                },
+                              ),
+                            );
+                          },
+                          icon: Icon(
+                            Icons.arrow_forward_ios,
+                          ),
+                        )
                       ],
-                    )
+                    ),
+                    Divider(
+                      color: Colors.black26,
+                    ),
                   ],
                 ),
               ),
-              Container(
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: Colors.black,
-                      width: 1.0,
-                    ),
-                  ),
-                ),
+              Padding(
+                padding: EdgeInsets.only(left: 16, right: 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           "Syarat & Ketentuan",
                           style: TextStyle(
                             fontFamily: 'Poppins',
@@ -500,29 +499,33 @@ class _InvestorAccountPageState extends State<InvestorAccountPage> {
                           ),
                         ),
                         IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.arrow_forward_ios))
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return InvestorSyaratKetentuanPage();
+                                  },
+                                ),
+                              );
+                            },
+                            icon: Icon(Icons.arrow_forward_ios))
                       ],
-                    )
+                    ),
+                    Divider(
+                      color: Colors.black26,
+                    ),
                   ],
                 ),
               ),
-              Container(
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: Colors.black,
-                      width: 1.0,
-                    ),
-                  ),
-                ),
+              Padding(
+                padding: EdgeInsets.only(left: 16, right: 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           "Kebijakan Regulasi",
                           style: TextStyle(
                             fontFamily: 'Poppins',
@@ -530,16 +533,32 @@ class _InvestorAccountPageState extends State<InvestorAccountPage> {
                           ),
                         ),
                         IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.arrow_forward_ios))
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return InvestorKebijakanRegulasiPage();
+                                },
+                              ),
+                            );
+                          },
+                          icon: Icon(Icons.arrow_forward_ios),
+                        ),
                       ],
-                    )
+                    ),
+                    Divider(
+                      color: Colors.black26,
+                    ),
                   ],
                 ),
               ),
+              Divider(
+                color: Colors.black12,
+                thickness: 3,
+              ),
               Padding(
-                padding: const EdgeInsets.only(
-                    left: 32, right: 32, top: 20, bottom: 20),
+                padding:
+                    EdgeInsets.only(left: 32, right: 32, top: 20, bottom: 20),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromRGBO(0, 97, 175, 1)),

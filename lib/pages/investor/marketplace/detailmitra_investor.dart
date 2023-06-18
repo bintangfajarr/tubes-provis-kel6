@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'package:tubes/pages/investor/marketplace/market_investor.dart';
+import '../Investor.dart';
 
 enum modal { nominal1, nominal2, nominal3, nominal4, nominal5 }
 
@@ -25,27 +27,27 @@ class _DetailMitraPageState extends State<DetailMitraPage> {
     return Scaffold(
       backgroundColor: Color.fromARGB(250, 250, 250, 250),
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_rounded),
-          onPressed: () {
-            Navigator.of(context).pop(
-              MaterialPageRoute(
-                builder: (context) {
-                  return InvestorMarketplacePage();
-                },
-              ),
-            );
-          },
-          color: Colors.black,
+        elevation: 0,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color.fromRGBO(0, 97, 175, 1),
+                Color.fromRGBO(18, 62, 99, 1),
+              ],
+            ),
+          ),
         ),
-        backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(
           "Detail Mitra",
           style: TextStyle(
-              fontFamily: "Poppins",
-              fontWeight: FontWeight.bold,
-              color: Colors.black),
+            fontFamily: "Poppins",
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
         ),
       ),
       body: ListView(
@@ -555,6 +557,7 @@ class _DetailMitraPageState extends State<DetailMitraPage> {
                       setState(() {
                         macamModal = modal.nominal1;
                         _textEditingController.text = '500.000';
+                        textFieldValue = '500.000';
                       });
                     },
                     child: Text(
@@ -566,10 +569,10 @@ class _DetailMitraPageState extends State<DetailMitraPage> {
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: macamModal == modal.nominal1
+                      primary: macamModal == modal.nominal1
                           ? Color.fromARGB(255, 0, 97, 175)
                           : Colors.white,
-                      foregroundColor:
+                      onPrimary:
                           Colors.blue, // Change the onPrimary color to blue
                       side: BorderSide(
                         color: macamModal == modal.nominal1
@@ -586,6 +589,7 @@ class _DetailMitraPageState extends State<DetailMitraPage> {
                       setState(() {
                         macamModal = modal.nominal2;
                         _textEditingController.text = '1.000.000';
+                        textFieldValue = '1.000.000';
                       });
                     },
                     child: Text(
@@ -597,10 +601,10 @@ class _DetailMitraPageState extends State<DetailMitraPage> {
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: macamModal == modal.nominal2
+                      primary: macamModal == modal.nominal2
                           ? Color.fromARGB(255, 0, 97, 175)
                           : Colors.white,
-                      foregroundColor:
+                      onPrimary:
                           Colors.blue, // Change the onPrimary color to blue
                       side: BorderSide(
                         color: macamModal == modal.nominal2
@@ -617,6 +621,7 @@ class _DetailMitraPageState extends State<DetailMitraPage> {
                       setState(() {
                         macamModal = modal.nominal3;
                         _textEditingController.text = '2.000.000';
+                        textFieldValue = '2.000.000';
                       });
                     },
                     child: Text(
@@ -628,10 +633,10 @@ class _DetailMitraPageState extends State<DetailMitraPage> {
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: macamModal == modal.nominal3
+                      primary: macamModal == modal.nominal3
                           ? Color.fromARGB(255, 0, 97, 175)
                           : Colors.white,
-                      foregroundColor:
+                      onPrimary:
                           Colors.blue, // Change the onPrimary color to blue
                       side: BorderSide(
                         color: macamModal == modal.nominal3
@@ -667,10 +672,10 @@ class _DetailMitraPageState extends State<DetailMitraPage> {
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: macamModal == modal.nominal4
+                      primary: macamModal == modal.nominal4
                           ? Color.fromARGB(255, 0, 97, 175)
                           : Colors.white,
-                      foregroundColor:
+                      onPrimary:
                           Colors.blue, // Change the onPrimary color to blue
                       side: BorderSide(
                         color: macamModal == modal.nominal4
@@ -687,6 +692,7 @@ class _DetailMitraPageState extends State<DetailMitraPage> {
                       setState(() {
                         macamModal = modal.nominal5;
                         _textEditingController.clear();
+                        textFieldValue = "";
                       });
                     },
                     child: Text(
@@ -698,10 +704,10 @@ class _DetailMitraPageState extends State<DetailMitraPage> {
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: macamModal == modal.nominal5
+                      primary: macamModal == modal.nominal5
                           ? Color.fromARGB(255, 0, 97, 175)
                           : Colors.white,
-                      foregroundColor:
+                      onPrimary:
                           Colors.blue, // Change the onPrimary color to blue
                       side: BorderSide(
                         color: macamModal == modal.nominal5
@@ -742,15 +748,265 @@ class _DetailMitraPageState extends State<DetailMitraPage> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return InvestorMarketplacePage();
-                      },
+                  showModalBottomSheet(
+                    context: context,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                      ),
+                    ),
+                    builder: (context) => Container(
+                      height: 400,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: 16, right: 16, top: 10, bottom: 10),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Modal Tani Sawit",
+                                      style: TextStyle(
+                                        fontFamily: "Poppins",
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Rp ${textFieldValue}",
+                                      style: TextStyle(
+                                        fontFamily: "Poppins",
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Fauzan Ahmad",
+                                      style: TextStyle(
+                                        fontFamily: "Poppins",
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.all(2),
+                                      child: Text(
+                                        "CROWDFUNDING",
+                                        style: TextStyle(
+                                          fontFamily: "Poppins",
+                                          color: Colors.white,
+                                          fontSize: 10,
+                                        ),
+                                      ),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Color(0xff0061af),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Divider(
+                            color: Colors.black12,
+                            thickness: 3,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: 16, right: 16, top: 10, bottom: 10),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Akad Pendanaan",
+                                      style: TextStyle(
+                                        fontFamily: "Poppins",
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {},
+                                      child: Text(
+                                        "Lihat Dokumen",
+                                        style: TextStyle(
+                                          fontFamily: "Poppins",
+                                          color: Colors.white,
+                                          fontSize: 10,
+                                        ),
+                                      ),
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStatePropertyAll(
+                                          Color(0xff0061af),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  textAlign: TextAlign.justify,
+                                  "Saya mengerti dan menyetujui syarat dan ketentuan pendanaan dan dengan ini setuju untuk melanjutkan ke proses pembayaran",
+                                  style: TextStyle(
+                                    fontFamily: "Poppins",
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Divider(
+                            color: Colors.black12,
+                            thickness: 3,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                "Pembayaran",
+                                style: TextStyle(
+                                  fontFamily: "Poppins",
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Subtotal",
+                                      style: TextStyle(
+                                        fontFamily: "Poppins",
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Rp ${textFieldValue}",
+                                      style: TextStyle(
+                                        fontFamily: "Poppins",
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Dana Tersedia",
+                                      style: TextStyle(
+                                        fontFamily: "Poppins",
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Rp 0",
+                                      style: TextStyle(
+                                        fontFamily: "Poppins",
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Spacer(),
+                          Divider(
+                            color: Colors.black12,
+                            thickness: 3,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                QuickAlert.show(
+                                  context: context,
+                                  type: QuickAlertType.success,
+                                  text: 'Pembayaran Berhasil',
+                                  confirmBtnColor:
+                                      Color.fromARGB(255, 0, 97, 175),
+                                  onConfirmBtnTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) {
+                                          return InvestorPage();
+                                        },
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                              child: Text(
+                                "Modalin",
+                                style: TextStyle(
+                                  fontFamily: "Poppins",
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                  Color.fromARGB(255, 0, 97, 175),
+                                ),
+                                fixedSize: MaterialStateProperty.all(
+                                  Size(256.0, 48.0),
+                                ),
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },
-                child: Text("Modalin Mitra"),
+                child: Text(
+                  "Modalin Mitra",
+                  style: TextStyle(
+                    fontFamily: "Poppins",
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
                     Color.fromARGB(255, 0, 97, 175),

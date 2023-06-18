@@ -13,15 +13,25 @@ class _InvestorDocumentPageState extends State<InvestorDocumentPage> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 250, 250, 250),
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color.fromRGBO(0, 97, 175, 1),
+                Color.fromRGBO(18, 62, 99, 1),
+              ],
+            ),
+          ),
+        ),
         centerTitle: true,
         title: Text(
           "Dokumen",
           style: TextStyle(
             fontFamily: "Poppins",
             fontWeight: FontWeight.bold,
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
       ),

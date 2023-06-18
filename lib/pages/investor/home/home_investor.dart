@@ -5,6 +5,11 @@ import 'dart:developer' as developer;
 import 'package:tubes/classes/auth.dart';
 import 'package:tubes/classes/format.dart';
 
+import '../activity/withdraw_investor.dart';
+import '../marketplace/detailmitra_investor.dart';
+import '../marketplace/market_investor.dart';
+import 'notification_investor.dart';
+
 class InvestorHomePage extends StatefulWidget {
   @override
   State<InvestorHomePage> createState() => _InvestorHomePageState();
@@ -62,7 +67,7 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                         Align(
                           alignment: Alignment.topLeft,
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 15, top: 19),
+                            padding: const EdgeInsets.only(left: 16, top: 16),
                             child: Text(
                               'Hi, ' + user.user_nama + '!',
                               textAlign: TextAlign.center,
@@ -79,10 +84,18 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                         Align(
                           alignment: Alignment.topRight,
                           child: Padding(
-                            padding: const EdgeInsets.only(right: 15, top: 14),
-                            child: Icon(
-                              Icons.notifications_none_rounded,
-                              size: 25,
+                            padding: const EdgeInsets.only(right: 16, top: 8),
+                            child: IconButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return InvestorNotificationPage();
+                                    },
+                                  ),
+                                );
+                              },
+                              icon: Icon(Icons.notifications),
                               color: Colors.white,
                             ),
                           ),
@@ -90,7 +103,7 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                         Align(
                           alignment: Alignment.topLeft,
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 15, top: 55),
+                            padding: const EdgeInsets.only(left: 16, top: 55),
                             child: Text(
                               'Total asetmu',
                               textAlign: TextAlign.center,
@@ -107,7 +120,7 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                         Align(
                           alignment: Alignment.topLeft,
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 15, top: 90),
+                            padding: const EdgeInsets.only(left: 16, top: 90),
                             child: RichText(
                               textAlign: TextAlign.center,
                               text: TextSpan(
@@ -144,7 +157,7 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                         Align(
                           alignment: Alignment.topLeft,
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 15, top: 70),
+                            padding: const EdgeInsets.only(left: 16, top: 70),
                             child: Text(
                               'Rp 0',
                               textAlign: TextAlign.center,
@@ -173,7 +186,7 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                           alignment: Alignment.topLeft,
                           child: Padding(
                             padding: const EdgeInsets.only(
-                                left: 7, top: 107, right: 7),
+                                left: 16, top: 107, right: 16),
                             child: Container(
                               padding: EdgeInsets.fromLTRB(20, 13, 20, 0),
                               height: 77,
@@ -275,7 +288,15 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           IconButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                  builder: (context) {
+                                                    return InvestorWithdrawPage();
+                                                  },
+                                                ),
+                                              );
+                                            },
                                             icon: Icon(Icons
                                                 .arrow_circle_down_outlined),
                                             color: Color(0xff0061af),
@@ -305,10 +326,10 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -337,7 +358,7 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                 height: 20,
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
                 child: Container(
                   height: 220,
                   child: ListView.builder(
@@ -463,7 +484,15 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                                     padding:
                                         EdgeInsets.only(bottom: 20.0, left: 30),
                                     iconSize: 30,
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return DetailMitraPage();
+                                          },
+                                        ),
+                                      );
+                                    },
                                     icon:
                                         Icon(Icons.add_circle_outline_rounded),
                                     color: Color.fromARGB(255, 0, 97, 175),
@@ -608,7 +637,7 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
           ),
           SizedBox(height: 20),
           Padding(
-            padding: const EdgeInsets.only(left: 10.0),
+            padding: const EdgeInsets.only(left: 16.0),
             child: Text(
               "Wishlist",
               style: TextStyle(
@@ -636,7 +665,15 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
                   height: 10,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // Navigator.of(context).push(
+                    //   MaterialPageRoute(
+                    //     builder: (context) {
+                    //       return InvestorMarketplacePage();
+                    //     },
+                    //   ),
+                    // );
+                  },
                   child: Text("Tambah"),
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
@@ -657,28 +694,6 @@ class _InvestorHomePageState extends State<InvestorHomePage> {
           ),
         ],
       ),
-
-      // bottomNavigationBar: BottomNavigationBar(
-      //   currentIndex: index,
-      //   selectedItemColor: const Color.fromARGB(255, 0, 97, 175),
-      //   unselectedItemColor: Colors.grey[300],
-      //   onTap: (value) {
-      //     setState(() {
-      //       index = value;
-      //     });
-      //   },
-      //   items: const [
-      //     BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: "Home"),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(Icons.pie_chart_rounded), label: "Portofolio"),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(Icons.shopping_cart), label: "Marketplace"),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(Icons.dashboard_rounded), label: "Activity"),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(Icons.account_circle_rounded), label: "Account"),
-      //   ],
-      // ),
     );
   }
 }
