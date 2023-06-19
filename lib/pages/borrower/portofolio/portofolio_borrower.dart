@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tubes/pages/borrower/portofolio/tagihan_borrower.dart';
+import 'package:tubes/pages/borrower/portofolio/transaksi_borrower.dart';
 
 class BorrowerPortofolioPage extends StatefulWidget {
   const BorrowerPortofolioPage({super.key});
@@ -94,7 +96,7 @@ class _BorrowerPortofolioPageState extends State<BorrowerPortofolioPage> {
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: Container(
-                        padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+                        padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
                         width: 335,
                         height: 98,
                         decoration: BoxDecoration(
@@ -109,61 +111,72 @@ class _BorrowerPortofolioPageState extends State<BorrowerPortofolioPage> {
                           ],
                         ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(bottom: 8),
-                                    width: 39,
-                                    height: 39,
-                                    child: Icon(
-                                      Icons.library_books_outlined,
-                                      size: 39,
-                                      color: Color(0xff0061af),
-                                    ),
+                            Column(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(bottom: 8),
+                                  height: 40,
+                                  child: IconButton(
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return BorrowerTagihanPage();
+                                          },
+                                        ),
+                                      );
+                                    },
+                                    icon: Icon(Icons.library_books_outlined),
+                                    color: Color(0xff0061af),
+                                    iconSize: 40,
                                   ),
-                                  Text(
-                                    'Tagihan Saya',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
-                                      height: 1.5,
-                                      color: Color(0xff0061af),
-                                    ),
+                                ),
+                                Text(
+                                  'Tagihan Saya',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xff0061af),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(bottom: 8),
-                                    width: 40,
-                                    height: 40,
-                                    child: Icon(
-                                      Icons.payments_outlined,
-                                      size: 40,
-                                      color: Color(0xff0061af),
-                                    ),
+                            Column(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(bottom: 8),
+                                  height: 40,
+                                  child: IconButton(
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return BorrowerTransaksiPage();
+                                          },
+                                        ),
+                                      );
+                                    },
+                                    icon: Icon(Icons.payments_outlined),
+                                    color: Color(0xff0061af),
+                                    iconSize: 40,
                                   ),
-                                  Text(
-                                    'Transaksi',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
-                                      height: 1.5,
-                                      color: Color(0xff0061af),
-                                    ),
+                                ),
+                                Text(
+                                  'Transaksi',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    height: 1.5,
+                                    color: Color(0xff0061af),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
@@ -292,15 +305,6 @@ class _BorrowerPortofolioPageState extends State<BorrowerPortofolioPage> {
                                 ],
                               ),
                             ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Align(
-                            alignment: Alignment.topRight,
-                            child: Icon(
-                              Icons.add_circle_outline_rounded,
-                              color: Color.fromARGB(255, 0, 97, 175),
-                            ),
                           ),
                         ),
                       ],
@@ -552,15 +556,6 @@ class _BorrowerPortofolioPageState extends State<BorrowerPortofolioPage> {
                                 ],
                               ),
                             ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Align(
-                            alignment: Alignment.topRight,
-                            child: Icon(
-                              Icons.add_circle_outline_rounded,
-                              color: Color.fromARGB(255, 0, 97, 175),
-                            ),
                           ),
                         ),
                       ],

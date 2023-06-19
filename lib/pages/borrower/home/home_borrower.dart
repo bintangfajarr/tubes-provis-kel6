@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tubes/classes/auth.dart';
 import 'dart:developer' as developer;
 
+import 'package:tubes/pages/borrower/home/notification_borrower.dart';
+
 class BorrowerHomePage extends StatelessWidget {
   const BorrowerHomePage({super.key});
 
@@ -56,8 +58,16 @@ class BorrowerHomePage extends StatelessWidget {
                               ),
                             ),
                             IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.notifications_none_rounded),
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return BorrowerNotificationPage();
+                                    },
+                                  ),
+                                );
+                              },
+                              icon: Icon(Icons.notifications),
                               color: Colors.white,
                             ),
                           ],

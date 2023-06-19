@@ -1,9 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:tubes/pages/kebijakanreg.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
+import 'package:tubes/pages/investor/account/kebijakanreg_investor.dart';
+import 'package:tubes/pages/investor/account/syaratketentuan_investor.dart';
 import 'package:tubes/pages/login.dart';
 import 'package:tubes/pages/register.dart';
-import 'package:tubes/pages/syaratketentuan.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -130,7 +132,7 @@ class _LandingPageState extends State<LandingPage> {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
-                        return SyaratKetentuanPage();
+                        return InvestorSyaratKetentuanPage();
                       },
                     ),
                   );
@@ -279,7 +281,16 @@ class _LandingPageState extends State<LandingPage> {
                             IconButton(
                               padding: EdgeInsets.only(bottom: 20.0, left: 30),
                               iconSize: 30,
-                              onPressed: () {},
+                              onPressed: () {
+                                QuickAlert.show(
+                                  title: "Maaf",
+                                  context: context,
+                                  type: QuickAlertType.info,
+                                  text: 'Silakan Login terlebih dahulu',
+                                  confirmBtnColor:
+                                      Color.fromARGB(255, 0, 97, 175),
+                                );
+                              },
                               icon: Icon(Icons.add_circle_outline_rounded),
                               color: Color.fromARGB(255, 0, 97, 175),
                             ),
@@ -445,7 +456,7 @@ class _LandingPageState extends State<LandingPage> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) {
-                              return KebijakanRegulasiPage();
+                              return InvestorKebijakanRegulasiPage();
                             },
                           ),
                         );
