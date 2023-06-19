@@ -188,6 +188,10 @@ class _BorrowerAccountPageState extends State<BorrowerAccountPage> {
                   ),
                 ],
               ),
+              Divider(
+                color: Colors.black12,
+                thickness: 3,
+              ),
               Padding(
                 padding: const EdgeInsets.only(left: 16, right: 16),
                 child: Text(
@@ -199,191 +203,155 @@ class _BorrowerAccountPageState extends State<BorrowerAccountPage> {
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 8,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.black,
-                        width: 1.0,
-                      ),
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Email",
-                        style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        user.user_email,
-                        style: TextStyle(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Email",
+                      style: TextStyle(
                           fontFamily: 'Poppins',
                           fontSize: 18,
-                        ),
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      user.user_email,
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 18,
                       ),
-                    ],
-                  ),
+                    ),
+                    Divider(
+                      color: Colors.black26,
+                    ),
+                  ],
                 ),
               ),
               SizedBox(height: 8),
               Padding(
                 padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.black,
-                        width: 1.0,
-                      ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Password",
+                      style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
                     ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Password",
-                        style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromRGBO(0, 97, 175, 1)),
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return ChangePasswordPage();
-                              },
-                            ),
-                          );
-                        },
-                        child: Text(
-                          "Edit",
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 18,
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromRGBO(0, 97, 175, 1)),
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return ChangePasswordPage();
+                            },
                           ),
+                        );
+                      },
+                      child: Text(
+                        "Ganti Password",
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                    Divider(
+                      color: Colors.black26,
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(height: 8),
               Padding(
                 padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.black,
-                        width: 1.0,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Nama Lengkap",
+                      style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      user.user_nama,
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 18,
                       ),
                     ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Nama Lengkap",
-                        style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
+                    Divider(
+                      color: Colors.black26,
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "No. Handphone",
+                      style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      user.user_no_telp,
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 18,
                       ),
-                      Text(
-                        user.user_nama,
+                    ),
+                    Divider(
+                      color: Colors.black26,
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Surat Perjanjian Pendanaan",
+                      style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromRGBO(167, 167, 167, 1)),
+                      onPressed: () {},
+                      child: Text(
+                        "Dokumen",
                         style: TextStyle(
                           fontFamily: 'Poppins',
                           fontSize: 18,
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: 8),
-              Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.black,
-                        width: 1.0,
-                      ),
                     ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "No. Handphone",
-                        style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        user.user_no_telp,
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: 8),
-              Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.black,
-                        width: 1.0,
-                      ),
+                    Divider(
+                      color: Colors.black26,
                     ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Surat Perjanjian Pendanaan",
-                        style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromRGBO(167, 167, 167, 1)),
-                        onPressed: () {},
-                        child: Text(
-                          "Dokumen",
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 18,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+                  ],
                 ),
               ),
-              SizedBox(height: 20),
+              Divider(
+                color: Colors.black12,
+                thickness: 3,
+              ),
               Padding(
                 padding: const EdgeInsets.only(left: 16, right: 16),
                 child: Text(
@@ -394,119 +362,98 @@ class _BorrowerAccountPageState extends State<BorrowerAccountPage> {
                       fontFamily: 'Poppins'),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 8),
               Padding(
                 padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.black,
-                        width: 1.0,
-                      ),
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // ElevatedButton(
-                      //   style: ElevatedButton.styleFrom(
-                      //       backgroundColor:  Color.fromARGB(255, 0, 97, 175)),
-                      //   onPressed: () {},
-                      //   child:  Text(
-                      //     "Tambah Rekening",
-                      //     style: TextStyle(
-                      //       fontFamily: 'Poppins',
-                      //       fontSize: 18,
-                      //     ),
-                      //   ),
-                      // )
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Nama Bank",
-                            style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "BCA",
-                            style: TextStyle(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // ElevatedButton(
+                    //   style: ElevatedButton.styleFrom(
+                    //       backgroundColor:  Color.fromARGB(255, 0, 97, 175)),
+                    //   onPressed: () {},
+                    //   child:  Text(
+                    //     "Tambah Rekening",
+                    //     style: TextStyle(
+                    //       fontFamily: 'Poppins',
+                    //       fontSize: 18,
+                    //     ),
+                    //   ),
+                    // )
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Nama Bank",
+                          style: TextStyle(
                               fontFamily: 'Poppins',
                               fontSize: 18,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.black,
-                        width: 1.0,
-                      ),
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Nomer Rekening",
-                        style: TextStyle(
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "BCA",
+                          style: TextStyle(
                             fontFamily: 'Poppins',
                             fontSize: 18,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        "2309131213",
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 18,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
+                    Divider(
+                      color: Colors.black26,
+                    ),
+                  ],
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.black,
-                        width: 1.0,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Nomer Rekening",
+                      style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "2309131213",
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 18,
                       ),
                     ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Nama Pemilik",
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    Divider(
+                      color: Colors.black26,
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Nama Pemilik",
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Text(
-                        user.user_nama,
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 18,
-                        ),
+                    ),
+                    Text(
+                      user.user_nama,
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 18,
                       ),
-                    ],
-                  ),
+                    ),
+                    Divider(
+                      color: Colors.black26,
+                    ),
+                  ],
                 ),
               ),
               SizedBox(height: 20),
@@ -520,7 +467,11 @@ class _BorrowerAccountPageState extends State<BorrowerAccountPage> {
                       fontFamily: 'Poppins'),
                 ),
               ),
-              SizedBox(height: 10),
+              Divider(
+                color: Colors.black12,
+                thickness: 3,
+              ),
+              SizedBox(height: 8),
               Padding(
                 padding: const EdgeInsets.only(left: 16, right: 16),
                 child: Container(
@@ -558,134 +509,116 @@ class _BorrowerAccountPageState extends State<BorrowerAccountPage> {
                             icon: Icon(Icons.arrow_forward_ios),
                           ),
                         ],
-                      )
+                      ),
+                      Divider(
+                        color: Colors.black26,
+                      ),
                     ],
                   ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.black,
-                        width: 1.0,
-                      ),
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Resiko Pendanaan",
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 18,
-                            ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Resiko Pendanaan",
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 18,
                           ),
-                          IconButton(
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return RisikoPendanaanPage();
+                                },
+                              ),
+                            );
+                          },
+                          icon: Icon(Icons.arrow_forward_ios),
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      color: Colors.black26,
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Syarat & Ketentuan",
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 18,
+                          ),
+                        ),
+                        IconButton(
                             onPressed: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) {
-                                    return RisikoPendanaanPage();
+                                    return SyaratKetentuanPage();
                                   },
                                 ),
                               );
                             },
-                            icon: Icon(Icons.arrow_forward_ios),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+                            icon: Icon(Icons.arrow_forward_ios))
+                      ],
+                    ),
+                    Divider(
+                      color: Colors.black26,
+                    ),
+                  ],
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.black,
-                        width: 1.0,
-                      ),
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Syarat & Ketentuan",
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 18,
-                            ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Kebijakan Regulasi",
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 18,
                           ),
-                          IconButton(
-                              onPressed: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return SyaratKetentuanPage();
-                                    },
-                                  ),
-                                );
-                              },
-                              icon: Icon(Icons.arrow_forward_ios))
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.black,
-                        width: 1.0,
-                      ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return KebijakanRegulasiPage();
+                                },
+                              ),
+                            );
+                          },
+                          icon: Icon(Icons.arrow_forward_ios),
+                        )
+                      ],
                     ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Kebijakan Regulasi",
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 18,
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return KebijakanRegulasiPage();
-                                  },
-                                ),
-                              );
-                            },
-                            icon: Icon(Icons.arrow_forward_ios),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
+                    Divider(
+                      color: Colors.black26,
+                    ),
+                  ],
                 ),
               ),
               Padding(
