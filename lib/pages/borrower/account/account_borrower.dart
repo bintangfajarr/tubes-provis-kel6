@@ -230,7 +230,6 @@ class _BorrowerAccountPageState extends State<BorrowerAccountPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 8),
               Padding(
                 padding: const EdgeInsets.only(left: 16, right: 16),
                 child: Column(
@@ -280,11 +279,15 @@ class _BorrowerAccountPageState extends State<BorrowerAccountPage> {
                           fontSize: 18,
                           fontWeight: FontWeight.bold),
                     ),
-                    Text(
-                      user.user_nama,
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 18,
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromRGBO(0, 97, 175, 1)),
+                      onPressed: () {},
+                      child: Text(
+                        "Tambah Bank",
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                        ),
                       ),
                     ),
                     Divider(
@@ -368,23 +371,11 @@ class _BorrowerAccountPageState extends State<BorrowerAccountPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // ElevatedButton(
-                    //   style: ElevatedButton.styleFrom(
-                    //       backgroundColor:  Color.fromARGB(255, 0, 97, 175)),
-                    //   onPressed: () {},
-                    //   child:  Text(
-                    //     "Tambah Rekening",
-                    //     style: TextStyle(
-                    //       fontFamily: 'Poppins',
-                    //       fontSize: 18,
-                    //     ),
-                    //   ),
-                    // )
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Nama Bank",
+                          "Akun Bank Saya",
                           style: TextStyle(
                               fontFamily: 'Poppins',
                               fontSize: 18,
@@ -405,58 +396,11 @@ class _BorrowerAccountPageState extends State<BorrowerAccountPage> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Nomer Rekening",
-                      style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      "2309131213",
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 18,
-                      ),
-                    ),
-                    Divider(
-                      color: Colors.black26,
-                    ),
-                  ],
-                ),
+              Divider(
+                color: Colors.black12,
+                thickness: 3,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Nama Pemilik",
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      user.user_nama,
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 18,
-                      ),
-                    ),
-                    Divider(
-                      color: Colors.black26,
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 20),
+              SizedBox(height: 8),
               Padding(
                 padding: const EdgeInsets.only(left: 16, right: 16),
                 child: Text(
@@ -467,54 +411,40 @@ class _BorrowerAccountPageState extends State<BorrowerAccountPage> {
                       fontFamily: 'Poppins'),
                 ),
               ),
-              Divider(
-                color: Colors.black12,
-                thickness: 3,
-              ),
               SizedBox(height: 8),
               Padding(
                 padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.black,
-                        width: 1.0,
-                      ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Pusat Bantuan",
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 18,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return PusatBantuanPage();
+                                },
+                              ),
+                            );
+                          },
+                          icon: Icon(Icons.arrow_forward_ios),
+                        ),
+                      ],
                     ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Pusat Bantuan",
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 18,
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return PusatBantuanPage();
-                                  },
-                                ),
-                              );
-                            },
-                            icon: Icon(Icons.arrow_forward_ios),
-                          ),
-                        ],
-                      ),
-                      Divider(
-                        color: Colors.black26,
-                      ),
-                    ],
-                  ),
+                    Divider(
+                      color: Colors.black26,
+                    ),
+                  ],
                 ),
               ),
               Padding(

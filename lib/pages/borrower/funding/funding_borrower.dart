@@ -35,6 +35,7 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
   final tanggalLahir = TextEditingController();
   final alamat = TextEditingController();
   final pekerjaan = TextEditingController();
+  final penghasilan = TextEditingController();
 
   String _jenisGender = "";
   String _namaLengkap = "";
@@ -43,6 +44,7 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
   String _tanggalLahir = "";
   String _alamat = "";
   String _pekerjaan = "";
+  String _penghasilan = "";
 
   //detail usaha
   final namaUsaha = TextEditingController();
@@ -80,11 +82,13 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
 
   //Pendanaan
   final targetPendanaan = TextEditingController();
-  final deskripsiPendanaan = TextEditingController();
+  final bagiHasil = TextEditingController();
+  final tenor = TextEditingController();
 
   String _targetPendanaan = "";
-  String _deskripsiPendanaan = "";
+  String _bagiHasil = "";
   String _batasWaktuPendanaan = "";
+  String _tenor = "";
 
   DateTime _selectedDate = DateTime.now();
   TextEditingController _dateController = TextEditingController();
@@ -116,6 +120,7 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
       "pemilik_jenis_kelamin": _jenisGender,
       "pemilik_alamat": _alamat,
       "pemilik_pekerjaan": _pekerjaan,
+      "pemilik_penghasilan": int.parse(_penghasilan),
     };
 
     final responsePemilik = await http.post(
@@ -126,9 +131,7 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
 
     if (responsePemilik.statusCode == 200) {
       final responsePemilikData = jsonDecode(responsePemilik.body);
-      developer.log(responsePemilikData.toString(), name: "pemiliklog1");
       final pemilik = responsePemilikData['data'];
-      developer.log(pemilik.toString(), name: "pemiliklog2");
       final int pemilik_id = pemilik[0];
 
       final Map<String, dynamic> umkmData = {
@@ -162,7 +165,11 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
           "proyek_terkumpul": 0,
           "proyek_tgl_masuk": formattedDate,
           "proyek_tgl_keluar": _batasWaktuPendanaan,
+          "proyek_bagi_hasil": int.parse(_bagiHasil),
+          "proyek_tenor": int.parse(_tenor)
         };
+
+        developer.log(proyekData.toString());
 
         final responseProyek = await http.post(
           Uri.parse(url_proyek),
@@ -171,6 +178,7 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
         );
 
         if (responseProyek.statusCode == 200) {
+          developer.log(responseProyek.body);
           print('Proyek berhasil ditambahkan');
         } else {
           print('Error saat menambahkan proyek');
@@ -363,6 +371,34 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
                   ),
                   hintText: "Masukkan Pekerjaan Anda",
                   labelText: "Pekerjaan",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 0, 97, 175),
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 0, 97, 175),
+                      width: 2.0,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              TextField(
+                controller: penghasilan,
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 16,
+                  ),
+                  hintText: "Masukkan Penghasilan Per Bulan",
+                  labelText: "Penghasilan Per Bulan",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
@@ -833,15 +869,43 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
                 height: 20,
               ),
               TextField(
-                controller: deskripsiPendanaan,
+                controller: bagiHasil,
                 textInputAction: TextInputAction.done,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.symmetric(
                     horizontal: 16,
                     vertical: 16,
                   ),
-                  hintText: "Masukkan Deskripsi Pendanaan",
-                  labelText: "Deskripsi Pendanaan",
+                  hintText: "Masukkan Bagi Hasil (%)",
+                  labelText: "Bagi Hasil",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 0, 97, 175),
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 0, 97, 175),
+                      width: 2.0,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              TextField(
+                controller: tenor,
+                textInputAction: TextInputAction.done,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 16,
+                  ),
+                  hintText: "Masukkan Tenor (Minggu)",
+                  labelText: "Tenor",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
@@ -1024,6 +1088,28 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
                         child: Text(
                           textAlign: TextAlign.right,
                           "${_pekerjaan}",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  TableRow(
+                    children: [
+                      TableCell(
+                        child: Text(
+                          "Penghasilan",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      TableCell(
+                        child: Text(
+                          textAlign: TextAlign.right,
+                          "${_penghasilan}",
                           style: TextStyle(
                             fontFamily: "Poppins",
                           ),
@@ -1241,7 +1327,7 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
                     children: [
                       TableCell(
                         child: Text(
-                          "Deskripsi Pendanaan",
+                          "Bagi Hasil",
                           style: TextStyle(
                             fontFamily: "Poppins",
                             fontWeight: FontWeight.bold,
@@ -1251,7 +1337,29 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
                       TableCell(
                         child: Text(
                           textAlign: TextAlign.right,
-                          "${_deskripsiPendanaan}",
+                          "${_bagiHasil}",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  TableRow(
+                    children: [
+                      TableCell(
+                        child: Text(
+                          "Tenor",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      TableCell(
+                        child: Text(
+                          textAlign: TextAlign.right,
+                          "${_tenor}",
                           style: TextStyle(
                             fontFamily: "Poppins",
                           ),
@@ -1342,6 +1450,7 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
                         _tanggalLahir = tanggalLahir.text;
                         _alamat = alamat.text;
                         _pekerjaan = pekerjaan.text;
+                        _penghasilan = penghasilan.text;
 
                         //akses text detail usaha
                         _namaUsaha = namaUsaha.text;
@@ -1352,7 +1461,8 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
                         //akses text pendanaan usaha
                         _targetPendanaan = targetPendanaan.text;
                         _batasWaktuPendanaan = _dateController.text;
-                        _deskripsiPendanaan = deskripsiPendanaan.text;
+                        _bagiHasil = bagiHasil.text;
+                        _tenor = tenor.text;
                       },
                     );
                   }

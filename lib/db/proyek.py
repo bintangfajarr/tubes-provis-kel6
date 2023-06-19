@@ -10,6 +10,8 @@ class Proyek(BaseModel):
    proyek_terkumpul: int | None = None
    proyek_tgl_masuk: str
    proyek_tgl_keluar: str
+   proyek_bagi_hasil: int | None = None
+   proyek_tenor: int | None = None
 
 """ Kelas Proyek (Patch) """
 class ProyekPatch(BaseModel):
@@ -18,6 +20,8 @@ class ProyekPatch(BaseModel):
    proyek_terkumpul: int | None = -9999
    proyek_tgl_masuk: str | None = "kosong"
    proyek_tgl_keluar: str | None = "kosong"
+   proyek_bagi_hasil: int | None = -9999
+   proyek_tenor: int | None = -9999
 
 """ ======================================================================== """
 """ ------------------------------------------------------------------------ """
@@ -39,6 +43,8 @@ def init_proyek():
 				proyek_terkumpul  INTEGER   NOT NULL,
                 proyek_tgl_masuk  TEXT      NOT NULL,
                 proyek_tgl_keluar TEXT      NOT NULL,
+                proyek_bagi_hasil INTEGER  NOT NULL,
+                proyek_tenor      INTEGER  NOT NULL,
                 FOREIGN KEY (umkm_id) REFERENCES umkm (umkm_id)
 			)  
 			"""
@@ -57,7 +63,7 @@ def tambah_proyek(u: Proyek):
         DB_NAME = "fundalize.db"
         con = sqlite3.connect(DB_NAME)
         cur = con.cursor()
-        cur.execute("""insert into proyek (umkm_id, proyek_target, proyek_terkumpul, proyek_tgl_masuk, proyek_tgl_keluar) values ({},{},{},'{}','{}')""".format(u.umkm_id,u.proyek_target,u.proyek_terkumpul,u.proyek_tgl_masuk,u.proyek_tgl_keluar))
+        cur.execute("""insert into proyek (umkm_id, proyek_target, proyek_terkumpul, proyek_tgl_masuk, proyek_tgl_keluar, proyek_bagi_hasil, proyek_tenor) values ({},{},{},'{}','{}', {}, {})""".format(u.umkm_id,u.proyek_target,u.proyek_terkumpul,u.proyek_tgl_masuk,u.proyek_tgl_keluar, u.proyek_bagi_hasil, u.proyek_tenor))
         con.commit()
     except:
         return ({"status":"Error saat menambahkan proyek"})   
@@ -121,6 +127,16 @@ def update_proyek(response: Response, proyek_id: int, u: ProyekPatch ):
                 sqlstr = sqlstr + " proyek_tgl_keluar = '{}' ,".format(u.proyek_tgl_keluar)
             else:
                 sqlstr = sqlstr + " proyek_tgl_keluar = null, "  
+        if u.proyek_bagi_hasil!=-9999:
+            if u.proyek_bagi_hasil!=None:
+                sqlstr = sqlstr + " proyek_bagi_hasil = {} ,".format(u.proyek_bagi_hasil)
+            else:
+                sqlstr = sqlstr + " proyek_bagi_hasil = null, "
+        if u.proyek_tenor!=-9999:
+            if u.proyek_tenor!=None:
+                sqlstr = sqlstr + " proyek_tenor = {} ,".format(u.proyek_tenor)
+            else:
+                sqlstr = sqlstr + " proyek_tenor = null, "
 
         sqlstr = sqlstr[:-1] + " where proyek_id={} ".format(proyek_id) 
         print(sqlstr)   

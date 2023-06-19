@@ -13,6 +13,7 @@ class Pemilik(BaseModel):
    pemilik_jenis_kelamin: str
    pemilik_alamat: str
    pemilik_pekerjaan: str
+   pemilik_penghasilan: int | None = None
 
 """ Kelas Pemilik (Patch) """
 class PemilikPatch(BaseModel):
@@ -24,6 +25,7 @@ class PemilikPatch(BaseModel):
    pemilik_jenis_kelamin: str | None = "kosong"
    pemilik_alamat: str | None = "kosong"
    pemilik_pekerjaan: str | None = "kosong"
+   pemilik_penghasilan: int | None = -9999
 
 """ ======================================================================== """
 """ ------------------------------------------------------------------------ """
@@ -48,6 +50,7 @@ def init_pemilik():
 				pemilik_jenis_kelamin   TEXT    NOT NULL,
                 pemilik_alamat          TEXT    NOT NULL,
                 pemilik_pekerjaan       TEXT    NOT NULL,
+                pemilik_penghasilan     INTEGER NOT NULL,
                 FOREIGN KEY (user_id) REFERENCES user (user_id)
 			)  
 			"""
@@ -66,7 +69,7 @@ def tambah_pemilik(u: Pemilik):
         DB_NAME = "fundalize.db"
         con = sqlite3.connect(DB_NAME)
         cur = con.cursor()
-        cur.execute("""insert into pemilik (user_id, pemilik_nama, pemilik_nik, pemilik_tempat_lahir, pemilik_tanggal_lahir, pemilik_jenis_kelamin, pemilik_alamat, pemilik_pekerjaan) values ({},'{}','{}','{}','{}','{}','{}','{}')""".format(u.user_id, u.pemilik_nama,u.pemilik_nik,u.pemilik_tempat_lahir,u.pemilik_tanggal_lahir,u.pemilik_jenis_kelamin,u.pemilik_alamat,u.pemilik_pekerjaan))
+        cur.execute("""insert into pemilik (user_id, pemilik_nama, pemilik_nik, pemilik_tempat_lahir, pemilik_tanggal_lahir, pemilik_jenis_kelamin, pemilik_alamat, pemilik_pekerjaan, pemilik_penghasilan) values ({},'{}','{}','{}','{}','{}','{}','{}', {})""".format(u.user_id, u.pemilik_nama,u.pemilik_nik,u.pemilik_tempat_lahir,u.pemilik_tanggal_lahir,u.pemilik_jenis_kelamin,u.pemilik_alamat,u.pemilik_pekerjaan, u.pemilik_penghasilan))
         con.commit()
     except:
         return ({"status":"Error saat menambahkan pemilik"})   
@@ -158,6 +161,11 @@ def update_pemilik(response: Response, pemilik_id: int, u: PemilikPatch ):
                 sqlstr = sqlstr + " pemilik_pekerjaan = '{}' ,".format(u.pemilik_pekerjaan)
             else:    
                 sqlstr = sqlstr + " pemilik_pekerjaan = null ,"
+        if u.pemilik_penghasilan!=-9999:
+            if u.pemilik_penghasilan!=None:
+                sqlstr = sqlstr + " pemilik_penghasilan = {} ,".format(u.pemilik_penghasilan)
+            else:    
+                sqlstr = sqlstr + " pemilik_penghasilan = null ,"
 
         sqlstr = sqlstr[:-1] + " where pemilik_id={} ".format(pemilik_id) 
         print(sqlstr)   

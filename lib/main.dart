@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tubes/classes/pemilik.dart';
+import 'package:tubes/classes/marketplace.dart';
 import 'package:tubes/pages/investor/Investor.dart';
 // import 'package:tubes/pages/borrower/funding/funding_borrower.dart';
 // import 'package:tubes/pages/borrower/home/home_borrower.dart';
@@ -34,8 +34,11 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<UserCubit>(
           create: (BuildContext context) => UserCubit(),
         ),
-        BlocProvider<PemilikCubit>(
-          create: (BuildContext context) => PemilikCubit(),
+        BlocProvider<MarketplaceCubit>(
+          create: (BuildContext context) => MarketplaceCubit(),
+        ),
+        BlocProvider<ListMarketplaceCubit>(
+          create: (BuildContext context) => ListMarketplaceCubit(),
         ),
       ],
       child: MaterialApp(

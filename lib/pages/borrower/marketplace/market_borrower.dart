@@ -10,33 +10,32 @@ class BorrowerMarketplacePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Marketplace",
-        ),
-        elevation: 0,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color.fromRGBO(0, 97, 175, 1),
-                Color.fromRGBO(18, 62, 99, 1),
-              ],
+      body: ListView(
+        children: [
+          Container(
+            padding: EdgeInsets.fromLTRB(16, 16, 0, 16),
+            height: 56,
+            margin: EdgeInsets.only(bottom: 16),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromARGB(255, 0, 97, 175),
+                  Color.fromRGBO(18, 62, 99, 1),
+                ],
+              ),
+            ),
+            child: Text(
+              "Marketplace",
+              style: TextStyle(
+                fontFamily: "Poppins",
+                fontWeight: FontWeight.bold,
+                fontSize: 19,
+                color: Colors.white,
+              ),
             ),
           ),
-        ),
-        actions: <Widget>[
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.filter_list_rounded),
-          ),
-        ],
-      ),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
           Container(
             // Add padding around the search bar
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
