@@ -70,8 +70,8 @@ def login(user: User):
     finally:
         con.close()
 
-@app.get("/get_marketplace_data/")
-def get_marketplace_data():
+@app.get("/get_data_pendanaan/")
+def get_data_pendanaan():
 	try:
 		DB_NAME = "fundalize.db"
 		con = sqlite3.connect(DB_NAME)

@@ -48,12 +48,14 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
 
   //detail usaha
   final namaUsaha = TextEditingController();
+  final kotaUsaha = TextEditingController();
   final alamatUsaha = TextEditingController();
   final deskripsiUsaha = TextEditingController();
   String selectedKategori = "";
 
   String _namaUsaha = "";
   String _kategoriUsaha = "";
+  String _kotaUsaha = "";
   String _alamatUsaha = "";
   String _deskripsiUsaha = "";
 
@@ -139,6 +141,7 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
         "pemilik_id": pemilik_id,
         "umkm_nama": _namaUsaha,
         "umkm_kategori": _kategoriUsaha,
+        "umkm_kota": _kotaUsaha,
         "umkm_alamat": _alamatUsaha,
         "umkm_foto": 0,
         "umkm_deskripsi": _deskripsiUsaha,
@@ -626,6 +629,35 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
                       ),
                     );
                   },
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              TextField(
+                controller: kotaUsaha,
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.done,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 16,
+                  ),
+                  hintText: "Masukkan Kota Usaha",
+                  labelText: "Kota Usaha",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 0, 97, 175),
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 0, 97, 175),
+                      width: 2.0,
+                    ),
+                  ),
                 ),
               ),
               SizedBox(
@@ -1213,6 +1245,28 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
                     children: [
                       TableCell(
                         child: Text(
+                          "Kota Usaha",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      TableCell(
+                        child: Text(
+                          textAlign: TextAlign.right,
+                          "${_kotaUsaha}",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  TableRow(
+                    children: [
+                      TableCell(
+                        child: Text(
                           "Alamat Usaha",
                           style: TextStyle(
                             fontFamily: "Poppins",
@@ -1417,17 +1471,23 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
                         currentStep = step;
                       },
                     ),
+                onStepCancel: currentStep == 0
+                    ? null
+                    : () => setState(
+                          () => currentStep -= 1,
+                        ),
                 onStepContinue: () {
                   final isLastStep = currentStep == getSteps().length - 1;
 
                   if (isLastStep) {
+                    ajukanPendanaan(user.user_id);
+
                     QuickAlert.show(
                       context: context,
                       type: QuickAlertType.success,
                       text: 'Pengajuan Berhasil Diajukan',
                       confirmBtnColor: Color.fromARGB(255, 0, 97, 175),
                       onConfirmBtnTap: () {
-                        ajukanPendanaan(user.user_id);
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) {
@@ -1454,6 +1514,7 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
 
                         //akses text detail usaha
                         _namaUsaha = namaUsaha.text;
+                        _kotaUsaha = kotaUsaha.text;
                         _alamatUsaha = alamatUsaha.text;
                         _kategoriUsaha = selectedKategori;
                         _deskripsiUsaha = deskripsiUsaha.text;
@@ -1467,30 +1528,14 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
                     );
                   }
                 },
-                onStepCancel: currentStep == 0
-                    ? null
-                    : () => setState(
-                          () => currentStep -= 1,
-                        ),
                 controlsBuilder:
                     (BuildContext context, ControlsDetails details) {
                   final isLastStep = currentStep == getSteps().length - 1;
                   return Container(
-                    padding: EdgeInsets.all(20),
+                    padding: EdgeInsets.only(top: 20, bottom: 20),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: details.onStepContinue,
-                            child: Text(
-                              isLastStep ? 'Confirm' : 'Next',
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
                         if (currentStep != 0)
                           Expanded(
                             child: OutlinedButton(
@@ -1505,6 +1550,18 @@ class _BorrowerFundingPageState extends State<BorrowerFundingPage> {
                               ),
                             ),
                           ),
+                        if (currentStep != 0)
+                          SizedBox(
+                            width: 20,
+                          ),
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: details.onStepContinue,
+                            child: Text(
+                              isLastStep ? 'Confirm' : 'Next',
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   );

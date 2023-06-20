@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:developer' as developer;
-import 'package:tubes/classes/marketplace.dart';
-
+import 'package:tubes/classes/pendanaan.dart';
+import 'package:tubes/classes/format.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'detailmitra_investor.dart';
 
 class InvestorMarketplacePage extends StatelessWidget {
@@ -30,7 +31,7 @@ class InvestorMarketplacePage extends StatelessWidget {
               ),
             ),
             child: Text(
-              "Marketplace",
+              "Pendanaan",
               style: TextStyle(
                 fontFamily: "Poppins",
                 fontWeight: FontWeight.bold,
@@ -63,23 +64,23 @@ class InvestorMarketplacePage extends StatelessWidget {
           ),
           Container(
             height: 600,
-            child: BlocBuilder<ListMarketplaceCubit, ListMarketplaceModel>(
+            child: BlocBuilder<ListPendanaanCubit, ListPendanaanModel>(
               builder: (context, model) {
-                context.read<ListMarketplaceCubit>().fetchData();
-                if (model.listMarketplaceModel.isEmpty) {
+                context.read<ListPendanaanCubit>().fetchData();
+                if (model.listPendanaanModel.isEmpty) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
                 } else {
                   return ListView.builder(
                     scrollDirection: Axis.vertical,
-                    itemCount: model.listMarketplaceModel.length,
+                    itemCount: model.listPendanaanModel.length,
                     itemBuilder: (context, index) => Column(
                       children: [
                         Container(
                           padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                           margin: EdgeInsets.only(bottom: 10),
-                          width: 335,
+                          width: double.infinity,
                           height: 200,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(
@@ -151,22 +152,26 @@ class InvestorMarketplacePage extends StatelessWidget {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text(
-                                              model.listMarketplaceModel[index]
-                                                  .pemilik_nama,
-                                              style: TextStyle(
-                                                fontFamily: "Poppins",
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 14,
-                                              ),
-                                            ),
-                                            Text(
-                                              model.listMarketplaceModel[index]
-                                                  .umkm_kategori,
+                                            AutoSizeText(
+                                                model.listPendanaanModel[index]
+                                                    .pemilik_nama,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontFamily: "Poppins",
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 14,
+                                                ),
+                                                maxLines: 2,
+                                                minFontSize: 10),
+                                            AutoSizeText(
+                                              model.listPendanaanModel[index]
+                                                  .umkm_nama,
+                                              overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
                                                 fontFamily: "Poppins",
                                                 fontSize: 12,
                                               ),
+                                              maxLines: 2,
                                             ),
                                             Row(
                                               children: [
@@ -179,9 +184,8 @@ class InvestorMarketplacePage extends StatelessWidget {
                                                 ),
                                                 Text(
                                                   model
-                                                      .listMarketplaceModel[
-                                                          index]
-                                                      .umkm_alamat,
+                                                      .listPendanaanModel[index]
+                                                      .umkm_kota,
                                                   style: TextStyle(
                                                     fontFamily: "Poppins",
                                                     fontSize: 10,
@@ -199,6 +203,10 @@ class InvestorMarketplacePage extends StatelessWidget {
                                       alignment: Alignment.topRight,
                                       child: IconButton(
                                         onPressed: () {
+                                          context
+                                              .read<PendanaanCubit>()
+                                              .emitState(model
+                                                  .listPendanaanModel[index]);
                                           Navigator.of(context).push(
                                             MaterialPageRoute(
                                               builder: (context) {
@@ -236,9 +244,9 @@ class InvestorMarketplacePage extends StatelessWidget {
                                       ),
                                       Text(
                                         "Rp" +
-                                            model.listMarketplaceModel[index]
-                                                .proyek_target
-                                                .toString(),
+                                            Format.moneyFormat(model
+                                                .listPendanaanModel[index]
+                                                .proyek_target),
                                         style: TextStyle(
                                           fontFamily: "Poppins",
                                           fontSize: 12,
@@ -258,7 +266,7 @@ class InvestorMarketplacePage extends StatelessWidget {
                                         ),
                                       ),
                                       Text(
-                                        model.listMarketplaceModel[index]
+                                        model.listPendanaanModel[index]
                                                 .proyek_bagi_hasil
                                                 .toString() +
                                             "%",
@@ -281,7 +289,7 @@ class InvestorMarketplacePage extends StatelessWidget {
                                         ),
                                       ),
                                       Text(
-                                        model.listMarketplaceModel[index]
+                                        model.listPendanaanModel[index]
                                                 .proyek_tenor
                                                 .toString() +
                                             " Minggu",
@@ -318,7 +326,14 @@ class InvestorMarketplacePage extends StatelessWidget {
                                           ),
                                           Container(
                                             height: 12,
-                                            width: 200,
+                                            width:
+                                                (model.listPendanaanModel[index]
+                                                            .proyek_terkumpul /
+                                                        model
+                                                            .listPendanaanModel[
+                                                                index]
+                                                            .proyek_target) *
+                                                    230,
                                             decoration: BoxDecoration(
                                               color: Color.fromARGB(
                                                   255, 0, 97, 175),
@@ -331,9 +346,12 @@ class InvestorMarketplacePage extends StatelessWidget {
                                             padding:
                                                 EdgeInsets.only(left: 10.0),
                                             height: 12,
-                                            width: 200,
+                                            width: 230,
                                             child: Text(
-                                              "Rp. 4.000.000",
+                                              "Rp" +
+                                                  Format.moneyFormat(model
+                                                      .listPendanaanModel[index]
+                                                      .proyek_terkumpul),
                                               style: TextStyle(
                                                   fontFamily: "Poppins",
                                                   fontSize: 8,

@@ -5,23 +5,25 @@ from main import app
 
 """ Kelas UMKM """
 class Umkm(BaseModel):
-   user_id: int | None = None
-   pemilik_id: int | None = None
-   umkm_nama: str
-   umkm_kategori: str
-   umkm_alamat: str
-   umkm_foto: str
-   umkm_deskripsi: str
+    user_id: int | None = None
+    pemilik_id: int | None = None
+    umkm_nama: str
+    umkm_kategori: str
+    umkm_kota: str
+    umkm_alamat: str
+    umkm_foto: str
+    umkm_deskripsi: str
 
 """ Kelas UMKM (Patch) """
 class UmkmPatch(BaseModel):
-   user_id: int | None = -9999
-   pemilik_id: int | None = -9999
-   umkm_nama: str | None = "kosong"
-   umkm_kategori: str | None = "kosong"
-   umkm_alamat: str | None = "kosong"
-   umkm_foto: str | None = "kosong"
-   umkm_deskripsi: str | None = "kosong"
+    user_id: int | None = -9999
+    pemilik_id: int | None = -9999
+    umkm_nama: str | None = "kosong"
+    umkm_kategori: str | None = "kosong"
+    umkm_kota: str | None = "kosong"
+    umkm_alamat: str | None = "kosong"
+    umkm_foto: str | None = "kosong"
+    umkm_deskripsi: str | None = "kosong"
 
 """ ======================================================================== """
 """ ------------------------------------------------------------------------ """
@@ -42,6 +44,7 @@ def init_umkm():
                 pemilik_id      INTEGER NOT NULL,
 				umkm_nama       TEXT    NOT NULL,
 				umkm_kategori   TEXT    NOT NULL,
+                umkm_kota       TEXT    NOT NULL,
 				umkm_alamat     TEXT    NOT NULL,
                 umkm_foto       INTEGER,
 				umkm_deskripsi  TEXT    NOT NULL,
@@ -64,7 +67,7 @@ def tambah_umkm(u: Umkm):
         DB_NAME = "fundalize.db"
         con = sqlite3.connect(DB_NAME)
         cur = con.cursor()
-        cur.execute("""insert into umkm (user_id, pemilik_id, umkm_nama, umkm_kategori, umkm_alamat, umkm_foto, umkm_deskripsi) values ({},{},'{}','{}','{}','{}','{}')""".format(u.user_id,u.pemilik_id,u.umkm_nama,u.umkm_kategori,u.umkm_alamat,u.umkm_foto,u.umkm_deskripsi))
+        cur.execute("""insert into umkm (user_id, pemilik_id, umkm_nama, umkm_kategori, umkm_kota, umkm_alamat, umkm_foto, umkm_deskripsi) values ({},{},'{}','{}','{}','{}','{}','{}')""".format(u.user_id,u.pemilik_id,u.umkm_nama,u.umkm_kategori,u.umkm_kota,u.umkm_alamat,u.umkm_foto,u.umkm_deskripsi))
         con.commit()
     except:
         return ({"status":"Error saat menambahkan umkm"})   
@@ -136,6 +139,11 @@ def update_umkm(response: Response, umkm_id: int, u: UmkmPatch ):
                 sqlstr = sqlstr + " umkm_kategori = '{}' ,".format(u.umkm_kategori)
             else:
                 sqlstr = sqlstr + " umkm_kategori = null, "
+        if u.umkm_kota!="kosong":
+            if u.umkm_kota!=None:
+                sqlstr = sqlstr + " umkm_kota = '{}' ,".format(u.umkm_kota)
+            else:
+                sqlstr = sqlstr + " umkm_kota = null, "
         if u.umkm_alamat!="kosong":
             if u.umkm_alamat!=None:
                 sqlstr = sqlstr + " umkm_alamat = '{}' ,".format(u.umkm_alamat)

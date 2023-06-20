@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MarketplaceModel {
+class PendanaanModel {
   int pemilik_id;
   int user_id;
   String pemilik_nama;
@@ -18,6 +18,7 @@ class MarketplaceModel {
   int pemilik_id2;
   String umkm_nama;
   String umkm_kategori;
+  String umkm_kota;
   String umkm_alamat;
   int umkm_foto;
   String umkm_deskripsi;
@@ -30,7 +31,7 @@ class MarketplaceModel {
   int proyek_bagi_hasil;
   int proyek_tenor;
 
-  MarketplaceModel({
+  PendanaanModel({
     required this.pemilik_id,
     required this.user_id,
     required this.pemilik_nama,
@@ -46,6 +47,7 @@ class MarketplaceModel {
     required this.pemilik_id2,
     required this.umkm_nama,
     required this.umkm_kategori,
+    required this.umkm_kota,
     required this.umkm_alamat,
     required this.umkm_foto,
     required this.umkm_deskripsi,
@@ -60,9 +62,9 @@ class MarketplaceModel {
   });
 }
 
-class MarketplaceCubit extends Cubit<MarketplaceModel> {
-  MarketplaceCubit()
-      : super(MarketplaceModel(
+class PendanaanCubit extends Cubit<PendanaanModel> {
+  PendanaanCubit()
+      : super(PendanaanModel(
             pemilik_id: 0,
             user_id: 0,
             pemilik_nama: "",
@@ -78,6 +80,7 @@ class MarketplaceCubit extends Cubit<MarketplaceModel> {
             pemilik_id2: 0,
             umkm_nama: "",
             umkm_kategori: "",
+            umkm_kota: "",
             umkm_alamat: "",
             umkm_foto: 0,
             umkm_deskripsi: "",
@@ -89,6 +92,8 @@ class MarketplaceCubit extends Cubit<MarketplaceModel> {
             proyek_tgl_keluar: "",
             proyek_bagi_hasil: 0,
             proyek_tenor: 0));
+
+  void emitState(PendanaanModel pendanaanModel) => emit(pendanaanModel);
 
   void setFromJson(Map<String, dynamic> json) {
     var pemilik_id = json["pemilik_id"];
@@ -106,6 +111,7 @@ class MarketplaceCubit extends Cubit<MarketplaceModel> {
     var pemilik_id2 = json["pemilik_id"];
     var umkm_nama = json["umkm_nama"];
     var umkm_kategori = json["umkm_kategori"];
+    var umkm_kota = json["umkm_kota"];
     var umkm_alamat = json["umkm_alamat"];
     var umkm_foto = json["umkm_foto"];
     var umkm_deskripsi = json["umkm_deskripsi"];
@@ -118,7 +124,7 @@ class MarketplaceCubit extends Cubit<MarketplaceModel> {
     var proyek_bagi_hasil = json["proyek_bagi_hasil"];
     var proyek_tenor = json["proyek_tenor"];
 
-    emit(MarketplaceModel(
+    emit(PendanaanModel(
       pemilik_id: pemilik_id,
       user_id: user_id,
       pemilik_nama: pemilik_nama,
@@ -133,6 +139,7 @@ class MarketplaceCubit extends Cubit<MarketplaceModel> {
       pemilik_id2: pemilik_id2,
       umkm_nama: umkm_nama,
       umkm_kategori: umkm_kategori,
+      umkm_kota: umkm_kota,
       umkm_alamat: umkm_alamat,
       umkm_foto: umkm_foto,
       umkm_deskripsi: umkm_deskripsi,
@@ -160,19 +167,18 @@ class MarketplaceCubit extends Cubit<MarketplaceModel> {
   }
 }
 
-class ListMarketplaceModel {
-  List<MarketplaceModel> listMarketplaceModel = <MarketplaceModel>[];
-  ListMarketplaceModel({required this.listMarketplaceModel});
+class ListPendanaanModel {
+  List<PendanaanModel> listPendanaanModel = <PendanaanModel>[];
+  ListPendanaanModel({required this.listPendanaanModel});
 }
 
-class ListMarketplaceCubit extends Cubit<ListMarketplaceModel> {
-  String url = "http://localhost:8000/get_marketplace_data";
+class ListPendanaanCubit extends Cubit<ListPendanaanModel> {
+  String url = "http://localhost:8000/get_data_pendanaan";
 
-  ListMarketplaceCubit()
-      : super(ListMarketplaceModel(listMarketplaceModel: []));
+  ListPendanaanCubit() : super(ListPendanaanModel(listPendanaanModel: []));
 
   void setFromJson(Map<String, dynamic> json) {
-    List<MarketplaceModel> listMarketplaceModel = <MarketplaceModel>[];
+    List<PendanaanModel> listPendanaanModel = <PendanaanModel>[];
     var data = json["data"];
     for (var val in data) {
       var pemilik_id = val[0];
@@ -190,20 +196,21 @@ class ListMarketplaceCubit extends Cubit<ListMarketplaceModel> {
       var pemilik_id2 = val[12];
       var umkm_nama = val[13];
       var umkm_kategori = val[14];
-      var umkm_alamat = val[15];
-      var umkm_foto = val[16];
-      var umkm_deskripsi = val[17];
-      var proyek_id = val[18];
-      var umkm_id2 = val[19];
-      var proyek_target = val[20];
-      var proyek_terkumpul = val[21];
-      var proyek_tgl_masuk = val[22];
-      var proyek_tgl_keluar = val[23];
-      var proyek_bagi_hasil = val[24];
-      var proyek_tenor = val[25];
+      var umkm_kota = val[15];
+      var umkm_alamat = val[16];
+      var umkm_foto = val[17];
+      var umkm_deskripsi = val[18];
+      var proyek_id = val[19];
+      var umkm_id2 = val[20];
+      var proyek_target = val[21];
+      var proyek_terkumpul = val[22];
+      var proyek_tgl_masuk = val[23];
+      var proyek_tgl_keluar = val[24];
+      var proyek_bagi_hasil = val[25];
+      var proyek_tenor = val[26];
 
-      listMarketplaceModel.add(
-        MarketplaceModel(
+      listPendanaanModel.add(
+        PendanaanModel(
           pemilik_id: pemilik_id,
           user_id: user_id,
           pemilik_nama: pemilik_nama,
@@ -219,6 +226,7 @@ class ListMarketplaceCubit extends Cubit<ListMarketplaceModel> {
           pemilik_id2: pemilik_id2,
           umkm_nama: umkm_nama,
           umkm_kategori: umkm_kategori,
+          umkm_kota: umkm_kota,
           umkm_alamat: umkm_alamat,
           umkm_foto: umkm_foto,
           umkm_deskripsi: umkm_deskripsi,
@@ -233,7 +241,7 @@ class ListMarketplaceCubit extends Cubit<ListMarketplaceModel> {
         ),
       );
     }
-    emit(ListMarketplaceModel(listMarketplaceModel: listMarketplaceModel));
+    emit(ListPendanaanModel(listPendanaanModel: listPendanaanModel));
   }
 
   void fetchData() async {

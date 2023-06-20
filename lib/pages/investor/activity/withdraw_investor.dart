@@ -142,6 +142,26 @@ class _InvestorWithdrawPageState extends State<InvestorWithdrawPage> {
                   ),
                   ElevatedButton(
                     onPressed: () {
+                      if (user.user_saldo < int.parse(danaController.text)) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10),
+                              ),
+                            ),
+                            backgroundColor: Color.fromARGB(255, 0, 97, 175),
+                            content: Text(
+                              "Saldo tidak cukup!",
+                              style: TextStyle(
+                                fontFamily: "Poppins",
+                              ),
+                            ),
+                          ),
+                        );
+                        return;
+                      }
                       withdrawSaldo(
                         user.user_id,
                         user.user_saldo - int.parse(danaController.text),
