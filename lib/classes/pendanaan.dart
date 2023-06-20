@@ -174,6 +174,7 @@ class ListPendanaanModel {
 
 class ListPendanaanCubit extends Cubit<ListPendanaanModel> {
   String url = "http://localhost:8000/get_data_pendanaan";
+  String url_user = "http://localhost:8000/get_data_pendanaan_user/";
 
   ListPendanaanCubit() : super(ListPendanaanModel(listPendanaanModel: []));
 
@@ -246,6 +247,16 @@ class ListPendanaanCubit extends Cubit<ListPendanaanModel> {
 
   void fetchData() async {
     final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      setFromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Gagal load');
+    }
+  }
+
+  void fetchDataUser(int user_id) async {
+    final response = await http.get(Uri.parse(url_user + user_id.toString()));
 
     if (response.statusCode == 200) {
       setFromJson(jsonDecode(response.body));

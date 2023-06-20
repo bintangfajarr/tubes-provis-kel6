@@ -757,7 +757,7 @@ class _DetailMitraPageState extends State<DetailMitraPage> {
                         onPressed: () {
                           setState(() {
                             macamModal = modal.nominal4;
-                            _textEditingController.text = 'MAX';
+                            _textEditingController.text = "MAX";
                           });
                         },
                         child: Text(
