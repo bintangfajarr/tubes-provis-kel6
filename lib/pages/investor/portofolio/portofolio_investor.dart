@@ -95,26 +95,27 @@ class _InvestorPortofolioPageState extends State<InvestorPortofolioPage> {
             // Add padding around the search bar
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             // Use a Material design search bar
-            child: TextField(
-              // controller: _searchController,
-              decoration: InputDecoration(
-                hintText: 'Quick Search',
-                // Add a clear button to the search bar
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.clear),
-                  onPressed: () {},
-                ),
-                // Add a search icon or button to the search bar
-                prefixIcon: IconButton(
-                  icon: Icon(Icons.search),
-                  onPressed: () {
-                    // Perform the search here
-                  },
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
+            child: Text(
+              "Mitra Pendanaanmu",
+              style: TextStyle(
+                fontFamily: "Poppins",
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
               ),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(20.0),
+            child: Table(
+              children: [
+                TableRow(
+                  children: [
+                    Text('Mitra'),
+                    Text('Sisa Pokok(Rp)'),
+                    Text('Bagi Hasil(Rp)'),
+                  ],
+                ),
+              ],
             ),
           ),
         ],

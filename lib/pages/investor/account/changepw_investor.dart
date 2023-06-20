@@ -7,9 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tubes/classes/auth.dart';
 
 class InvestorChangePasswordPage extends StatefulWidget {
-  const InvestorChangePasswordPage({
-    super.key,
-  });
+  const InvestorChangePasswordPage({super.key});
 
   @override
   State<InvestorChangePasswordPage> createState() =>
@@ -37,7 +35,7 @@ class _InvestorChangePasswordPageState
       body: jsonEncode({
         'old_password': passwordLama.text,
         'new_password': passwordBaru.text,
-        'confirm_password': passwordBaru2.text,
+        'user_password': passwordBaru2.text,
       }),
     );
 
@@ -65,7 +63,7 @@ class _InvestorChangePasswordPageState
         builder: (context) {
           return AlertDialog(
             title: Text('Error'),
-            content: Text('Failed to change password.'),
+            content: Text('Failed to change password. ${response.body}'),
             actions: [
               TextButton(
                 onPressed: () {

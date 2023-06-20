@@ -85,60 +85,69 @@ def tampil_semua_user():
             
 # UPDATE
 @app.patch("/update_user/{user_id}",response_model = UserPatch)
-def update_user(response: Response, user_id: int, u: UserPatch ):
+def update_user(response: Response, user_id: int, u: UserPatch):
     try:
         print(str(u))
         DB_NAME = "fundalize.db"
         con = sqlite3.connect(DB_NAME)
         cur = con.cursor()
-        cur.execute("select * from user where user_id = ?", (user_id,) )  #tambah koma untuk menandakan tupple
+        cur.execute("select * from user where user_id = ?", (user_id,))  # tambah koma untuk menandakan tupple
         existing_item = cur.fetchone()
     except Exception as e:
-        raise HTTPException(status_code=500, detail="Terjadi exception: {}".format(str(e))) # misal database down    
-    if existing_item:  #data ada, lakukan update
-        sqlstr = "update user set " #asumsi minimal ada satu field update
+        raise HTTPException(status_code=500, detail="Terjadi exception: {}".format(str(e)))  # misal database down
+    if existing_item:  # data ada, lakukan update
+        # asumsi minimal ada satu field update
         # todo: bisa di-refactor dan dirapikan
-        if u.user_nama!="kosong":
-            if u.user_nama!=None:
-                sqlstr = sqlstr + " user_nama = '{}' ,".format(u.user_nama)
-            else:  
-                sqlstr = sqlstr + " user_nama = null ,"
-        if u.user_email!="kosong":
-            if u.user_email!=None:
-                sqlstr = sqlstr + " user_email = '{}' ,".format(u.user_email)
+        sqlstr = "UPDATE user SET "
+        
+        if u.user_nama != "kosong":
+            if u.user_nama is not None:
+                sqlstr += "user_nama = '{}', ".format(u.user_nama)
             else:
-                sqlstr = sqlstr + " user_email = null ,"   
-        if u.user_no_telp!="kosong":
-            if u.user_no_telp!=None:
-                sqlstr = sqlstr + " user_no_telp = '{}' ,".format(u.user_no_telp)
+                sqlstr += "user_nama = NULL, "
+        
+        if u.user_email != "kosong":
+            if u.user_email is not None:
+                sqlstr += "user_email = '{}', ".format(u.user_email)
             else:
-                sqlstr = sqlstr + " user_no_telp = null, "  
-        if u.user_password!="kosong":
-            if u.user_password!=None:
-                sqlstr = sqlstr + " user_password = '{}' ,".format(u.user_password)
+                sqlstr += "user_email = NULL, "
+        
+        if u.user_no_telp != "kosong":
+            if u.user_no_telp is not None:
+                sqlstr += "user_no_telp = '{}', ".format(u.user_no_telp)
             else:
-                sqlstr = sqlstr + " user_password = null, "
-        if u.user_role!="kosong":
-            if u.user_role!=None:
-                sqlstr = sqlstr + " user_role = '{}' ,".format(u.user_role)
+                sqlstr += "user_no_telp = NULL, "
+        
+        if u.user_password != "kosong":
+            if u.user_password is not None:
+                sqlstr += "user_password = '{}', ".format(u.user_password)
             else:
-                sqlstr = sqlstr + " user_role = null, "  
-        if u.user_saldo!=-9999:
-            if u.user_saldo!=None:
-                sqlstr = sqlstr + " user_saldo = {} ,".format(u.user_saldo)
-            else:    
-                sqlstr = sqlstr + " user_saldo = null ,"
-
-        sqlstr = sqlstr[:-1] + " where user_id={} ".format(user_id) 
-        print(sqlstr)   
+                sqlstr += "user_password = NULL, "
+        
+        if u.user_role != "kosong":
+            if u.user_role is not None:
+                sqlstr += "user_role = '{}', ".format(u.user_role)
+            else:
+                sqlstr += "user_role = NULL, "
+        
+        if u.user_saldo != -9999:
+            if u.user_saldo is not None:
+                sqlstr += "user_saldo = {}, ".format(u.user_saldo)
+            else:
+                sqlstr += "user_saldo = NULL, "
+        
+        sqlstr = sqlstr[:-2]  # Remove the trailing comma and space
+        
+        sqlstr += " WHERE user_id = {}".format(user_id)
+        print(sqlstr)
         try:
             cur.execute(sqlstr)
-            con.commit()      
+            con.commit()
             response.headers["location"] = "/user/{}".format(user_id)
         except Exception as e:
-            raise HTTPException(status_code=500, detail="Terjadi exception: {}".format(str(e)))        
+            raise HTTPException(status_code=500, detail="Terjadi exception: {}".format(str(e)))
     else:  # data tidak ada 404, item not found
-        raise HTTPException(status_code=404, detail="Item Not Found") 
+        raise HTTPException(status_code=404, detail="Item Not Found")
     con.close()
     return u
 

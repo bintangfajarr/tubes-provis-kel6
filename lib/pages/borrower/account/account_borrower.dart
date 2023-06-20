@@ -249,42 +249,13 @@ class _BorrowerAccountPageState extends State<BorrowerAccountPage> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) {
-                              return ChangePasswordPage();
+                              return BorrowerChangePasswordPage();
                             },
                           ),
                         );
                       },
                       child: Text(
                         "Ganti Password",
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                        ),
-                      ),
-                    ),
-                    Divider(
-                      color: Colors.black26,
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Nama Lengkap",
-                      style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromRGBO(0, 97, 175, 1)),
-                      onPressed: () {},
-                      child: Text(
-                        "Tambah Bank",
                         style: TextStyle(
                           fontFamily: 'Poppins',
                         ),
