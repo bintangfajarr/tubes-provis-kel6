@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tubes/classes/pendanaan.dart';
+import 'package:tubes/classes/invest.dart';
 import 'package:tubes/pages/investor/Investor.dart';
 // import 'package:tubes/pages/borrower/funding/funding_borrower.dart';
 // import 'package:tubes/pages/borrower/home/home_borrower.dart';
@@ -39,6 +40,12 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider<ListPendanaanCubit>(
           create: (BuildContext context) => ListPendanaanCubit(),
+        ),
+        BlocProvider<InvestasiCubit>(
+          create: (BuildContext context) => InvestasiCubit(),
+        ),
+        BlocProvider<ListInvestasiCubit>(
+          create: (BuildContext context) => ListInvestasiCubit(),
         ),
       ],
       child: MaterialApp(

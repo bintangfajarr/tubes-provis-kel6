@@ -99,3 +99,18 @@ def get_data_pendanaan_user(user_id: int):
 	finally:  	 
 		con.close()
 	return {"data":recs}
+
+@app.get("/get_investasi_user/{user_id}")
+def get_investasi_user(user_id: int):
+	try:
+		DB_NAME = "fundalize.db"
+		con = sqlite3.connect(DB_NAME)
+		cur = con.cursor()
+		recs = []
+		for row in cur.execute("SELECT * FROM investasi JOIN (SELECT * FROM pemilik JOIN umkm ON pemilik.pemilik_id = umkm.pemilik_id JOIN proyek ON umkm.umkm_id = proyek.umkm_id) as pendanaan ON investasi.proyek_id = pendanaan.proyek_id WHERE investasi.user_id = {}".format(user_id)):
+			recs.append(row)
+	except:
+		return ({"status":"Error saat mengakses proyek"})   
+	finally:  	 
+		con.close()
+	return {"data":recs}

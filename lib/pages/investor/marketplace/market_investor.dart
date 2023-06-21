@@ -31,7 +31,7 @@ class InvestorMarketplacePage extends StatelessWidget {
               ),
             ),
             child: Text(
-              "Pendanaan",
+              "Marketplace",
               style: TextStyle(
                 fontFamily: "Poppins",
                 fontWeight: FontWeight.bold,
